@@ -67,7 +67,7 @@ const TacticalNav = memo(({ active, onNavigate, onSos }: Props) => {
         onPointerLeave={cancel}
         onPointerCancel={cancel}
         aria-label="Hold for 2 seconds to send SOS"
-        className={cn('sos-ring fixed z-[91]', armed && 'active')}
+        className={cn('sos-ring fixed z-[9999]', armed && 'active')}
         style={{
           right: 20,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 68px)',
@@ -85,7 +85,7 @@ const TacticalNav = memo(({ active, onNavigate, onSos }: Props) => {
 
       {/* Bottom nav rail */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-[90] bg-black border-t border-[#1A1A1A]"
+        className="fixed bottom-0 left-0 right-0 z-[9998] bg-black border-t border-[#1A1A1A]"
         style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         aria-label="Primary"
       >

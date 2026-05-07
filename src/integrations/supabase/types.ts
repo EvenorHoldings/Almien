@@ -765,6 +765,57 @@ export type Database = {
           },
         ]
       }
+      health_facilities: {
+        Row: {
+          address: string | null
+          created_at: string
+          emergency_phone: string | null
+          facility_type: string
+          has_trauma_unit: boolean
+          id: string
+          is_24h: boolean
+          latitude: number
+          longitude: number
+          name: string
+          phone: string | null
+          suburb: string | null
+          updated_at: string
+          ward_number: number | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          emergency_phone?: string | null
+          facility_type: string
+          has_trauma_unit?: boolean
+          id?: string
+          is_24h?: boolean
+          latitude: number
+          longitude: number
+          name: string
+          phone?: string | null
+          suburb?: string | null
+          updated_at?: string
+          ward_number?: number | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          emergency_phone?: string | null
+          facility_type?: string
+          has_trauma_unit?: boolean
+          id?: string
+          is_24h?: boolean
+          latitude?: number
+          longitude?: number
+          name?: string
+          phone?: string | null
+          suburb?: string | null
+          updated_at?: string
+          ward_number?: number | null
+        }
+        Relationships: []
+      }
       hiking_trails: {
         Row: {
           coordinates_lat: number | null
@@ -1628,6 +1679,51 @@ export type Database = {
             referencedColumns: ["ward_number"]
           },
         ]
+      }
+      saps_stations: {
+        Row: {
+          address: string | null
+          created_at: string
+          id: string
+          is_24h: boolean
+          latitude: number
+          longitude: number
+          name: string
+          phone: string | null
+          station_code: string | null
+          suburb: string | null
+          updated_at: string
+          ward_number: number | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          id?: string
+          is_24h?: boolean
+          latitude: number
+          longitude: number
+          name: string
+          phone?: string | null
+          station_code?: string | null
+          suburb?: string | null
+          updated_at?: string
+          ward_number?: number | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          id?: string
+          is_24h?: boolean
+          latitude?: number
+          longitude?: number
+          name?: string
+          phone?: string | null
+          station_code?: string | null
+          suburb?: string | null
+          updated_at?: string
+          ward_number?: number | null
+        }
+        Relationships: []
       }
       suburb_intelligence: {
         Row: {

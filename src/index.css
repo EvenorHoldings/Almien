@@ -165,6 +165,11 @@
     box-sizing: border-box;
   }
 
+  /* Smooth momentum scroll on iOS for any scrollable region */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
   html, body, #root {
     @apply w-full max-w-full overflow-x-hidden;
     background: #000;
@@ -184,6 +189,10 @@
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     touch-action: manipulation;
+    /* Respect device safe areas (notches, gesture bars). Bottom nav owns its own
+       safe-area padding, so body uses min 0 there to avoid double-padding. */
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 
   h1, h2, h3 {

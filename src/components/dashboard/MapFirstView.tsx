@@ -3,8 +3,9 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents, Circle, P
 import L from 'leaflet';
 import { 
   Layers, Camera, TrafficCone, AlertTriangle, 
-  MapPin, ZoomIn, ZoomOut, Locate, Table2, Map, Grid3X3, Shield
+  MapPin, ZoomIn, ZoomOut, Locate, Table2, Map, Grid3X3, Shield, Cross
 } from 'lucide-react';
+import SafetyServicesLayer from './SafetyServicesLayer';
 import { cn } from '@/lib/utils';
 import { 
   MAP_CENTER, MAP_ZOOM, 
@@ -193,7 +194,12 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
     { id: 'cctv', name: 'CCTV Cameras', icon: Camera, color: '#3b82f6', enabled: false, category: 'infrastructure' },
     { id: 'traffic', name: 'Traffic Lights', icon: TrafficCone, color: '#22c55e', enabled: false, category: 'infrastructure' },
     { id: 'wildfire', name: 'Wildfire (AFIS)', icon: AlertTriangle, color: '#ef4444', enabled: false, category: 'operations' },
+    { id: 'saps', name: 'SAPS Stations', icon: Shield, color: '#00B8FF', enabled: false, category: 'operations' },
+    { id: 'hospitals', name: 'Hospitals & Clinics', icon: Cross, color: '#00FF85', enabled: false, category: 'operations' },
   ]);
+
+  const showSaps = !!layers.find(l => l.id === 'saps')?.enabled;
+  const showHospitals = !!layers.find(l => l.id === 'hospitals')?.enabled;
 
   // Handle map click - close panels
   const handleMapClick = useCallback(() => {
@@ -362,6 +368,9 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
 
           {/* Wildfire - Operations */}
           <WildfireLayer visible={!!showWildfire} />
+
+          {/* SAPS Stations + Health Facilities */}
+          <SafetyServicesLayer showSaps={showSaps} showHealth={showHospitals} />
           
           {/* Ward Boundaries - Ward/Suburb level */}
           <WardBoundariesLayer 

@@ -7,6 +7,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
     <Sonner
       theme="dark"
       className="toaster group"
+      style={{ zIndex: 10001 } as React.CSSProperties}
       toastOptions={{
         classNames: {
           toast:

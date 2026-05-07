@@ -20,7 +20,7 @@ const tabs: { id: ViewId | 'safi'; label: string; icon: typeof Shield }[] = [
 const BottomNavBar = memo(({ activeView, onNavigate, onSafiOpen }: BottomNavBarProps) => {
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-[90] bg-[hsl(var(--surface-base)/0.96)] backdrop-blur-xl border-t border-[hsl(var(--border-subtle))] w-full max-w-full"
+      className="fixed bottom-0 left-0 right-0 z-[9998] bg-[hsl(var(--surface-base)/0.96)] backdrop-blur-xl border-t border-[hsl(var(--border-subtle))] w-full max-w-full"
       style={{ height: 'calc(3.5rem + env(safe-area-inset-bottom, 0px))', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       <div className="flex items-stretch justify-around h-14 max-w-lg mx-auto relative">
