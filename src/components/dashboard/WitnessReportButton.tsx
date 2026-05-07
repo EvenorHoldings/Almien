@@ -55,7 +55,7 @@ const WitnessReportButton = memo(() => {
 
       {/* Report form overlay */}
       {open && (
-        <div className="fixed inset-0 z-[9998] bg-black/40 flex items-end sm:items-center justify-center animate-fade-in">
+        <div className="fixed inset-0 z-[10000] bg-black/40 flex items-end sm:items-center justify-center animate-fade-in">
           <div className="w-full sm:max-w-md bg-card border border-border rounded-t-2xl sm:rounded-2xl p-6 space-y-4 animate-scale-in">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-foreground flex items-center gap-2">

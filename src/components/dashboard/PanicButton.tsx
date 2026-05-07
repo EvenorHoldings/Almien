@@ -352,7 +352,7 @@ const PanicButton = memo(() => {
   // ============= TACTICAL SOS BUTTON =============
   return (
     <div
-      className="fixed z-[95] left-4 md:left-auto md:right-6 md:bottom-6"
+      className="fixed z-[9999] left-4 md:left-auto md:right-6 md:bottom-6"
       style={{ bottom: 'calc(3.5rem + env(safe-area-inset-bottom, 0px) + 16px)' }}
     >
       <button
