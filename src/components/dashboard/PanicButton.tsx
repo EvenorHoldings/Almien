@@ -362,15 +362,16 @@ const PanicButton = memo(() => {
         onTouchStart={handleHoldStart}
         onTouchEnd={handleHoldEnd}
         className={cn(
-          "relative w-[64px] h-[64px] bg-accent-threat text-white",
+          "relative w-20 h-20 md:w-[72px] md:h-[72px] bg-accent-threat text-white",
           "flex items-center justify-center",
           "border-2 border-accent-threat",
           "transition-transform duration-150",
           holding ? "scale-110" : "hover:scale-105",
           !holding && "sos-ring active"
         )}
-        style={{ borderRadius: 0 }}
-        aria-label="SOS Panic Button — hold for 1.5 seconds"
+        style={{ borderRadius: 0, touchAction: 'manipulation' }}
+        aria-label="Emergency SOS — Hold for 1.5 seconds to send an emergency alert to your network and nearby responders"
+        aria-describedby="sos-instructions"
       >
         {/* Corner crosshairs */}
         <span className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/80" />
@@ -386,7 +387,10 @@ const PanicButton = memo(() => {
           />
         )}
 
-        <span className="relative z-10 font-mono text-[13px] font-bold tracking-[0.15em]">SOS</span>
+        <span className="relative z-10 font-mono text-[15px] md:text-[13px] font-bold tracking-[0.15em]">SOS</span>
+        <span id="sos-instructions" className="sr-only">
+          Hold this button for 1.5 seconds to send an emergency alert to your trusted network and nearby community stewards. Your location will be shared automatically.
+        </span>
       </button>
       {holding && (
         <div className="absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[9px] font-bold tracking-[0.2em] text-accent-threat bg-background border border-accent-threat px-2 py-1">
