@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import { Bell, Filter, ChevronRight, Cpu, Navigation, Radio } from 'lucide-react';
 import ScoreRing from './ScoreRing';
+import NearestEmergencyCard from './NearestEmergencyCard';
+import { useProactiveSafetyAlerts } from '@/hooks/useProactiveSafetyAlerts';
 import type { ViewId } from './AlmienDashboard';
 
 interface Props {
@@ -26,6 +28,7 @@ const incidents = [
 
 const CommandCenterHome = memo(({ onNavigate, onOpenSafi }: Props) => {
   const score = 78;
+  useProactiveSafetyAlerts();
 
   return (
     <div className="page-animate w-full bg-black" style={{ paddingBottom: 136 }}>
@@ -123,6 +126,9 @@ const CommandCenterHome = memo(({ onNavigate, onOpenSafi }: Props) => {
           ))}
         </div>
       </section>
+
+      {/* NEAREST EMERGENCY (SAPS + Hospital) */}
+      <NearestEmergencyCard />
 
       {/* QUICK ACTIONS */}
       <section className="mt-6 px-5 grid grid-cols-3 gap-2">
