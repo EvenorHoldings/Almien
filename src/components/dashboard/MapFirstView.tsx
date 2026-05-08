@@ -20,6 +20,7 @@ import WardFallbackMarkersLayer from './WardFallbackMarkersLayer';
 import WildfireLayer from './WildfireLayer';
 import SafeZonesLayer from './SafeZonesLayer';
 import CrimeHeatmapLayer from './CrimeHeatmapLayer';
+import DarkZoneRadarLayer from './DarkZoneRadarLayer';
 import CitizenReportsLayer from './CitizenReportsLayer';
 import ZoomLevelIndicator from './ZoomLevelIndicator';
 import AreaInfoCard from './AreaInfoCard';
@@ -187,6 +188,7 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
   // Layer configuration
   const [layers, setLayers] = useState<LayerToggle[]>([
     { id: 'heatmap', name: 'Crime Heatmap', icon: AlertTriangle, color: '#ef4444', enabled: true, category: 'safety' },
+    { id: 'darkzones', name: 'Dark Zone Radar', icon: AlertTriangle, color: '#FF3B30', enabled: false, category: 'safety' },
     { id: 'safezones', name: 'Safe Zones', icon: Shield, color: '#10b981', enabled: true, category: 'safety' },
     { id: 'reports', name: 'Citizen Reports', icon: AlertTriangle, color: '#f97316', enabled: true, category: 'safety' },
     { id: 'risk', name: 'Pickpocket Zones', icon: AlertTriangle, color: '#f97316', enabled: true, category: 'safety' },
@@ -359,6 +361,9 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
 
           {/* Crime Heatmap - City/Ward level */}
           <CrimeHeatmapLayer visible={!!showHeatmap} />
+
+          {/* Dark Zone Radar — progressive risk severity rings */}
+          <DarkZoneRadarLayer visible={!!layers.find(l => l.id === 'darkzones')?.enabled} />
 
           {/* Citizen Reports - Ward/Suburb level */}
           <CitizenReportsLayer visible={!!showReports} />

@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAlmienStore } from '@/stores/almienStore';
+import { useUserLocation } from '@/hooks/useUserLocation';
 import { useToast } from '@/hooks/use-toast';
 import type { ViewId } from '../dashboard/AlmienDashboard';
 
@@ -26,8 +27,11 @@ interface Message {
   timestamp: Date;
 }
 
-// User context — would normally come from profile/store
-const userContext = { suburb: 'Sea Point', commute: 'CBD', riskTolerance: 'moderate' };
+// Static fallbacks — overridden at runtime inside SafiAI by store + geolocation
+const FALLBACK_CTX = { suburb: 'Sea Point', commute: 'CBD', riskTolerance: 'moderate' };
+// Backwards-compatible alias for sub-components (BriefingMode, RouteMode) that
+// don't yet have access to live geolocation context.
+const userContext = FALLBACK_CTX;
 
 const QUICK_PROMPTS = [
   'Is it safe to run at 6am?',
@@ -56,6 +60,17 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
   const toggleSafiVoiceReplies = useAlmienStore((s) => s.toggleSafiVoiceReplies);
   const safiHotwordEnabled = useAlmienStore((s) => s.safiHotwordEnabled);
   const toggleSafiHotword = useAlmienStore((s) => s.toggleSafiHotword);
+  const homeLocation = useAlmienStore((s) => s.userProfile?.homeLocation);
+  const { coords, nearestSuburb, nearestArea } = useUserLocation();
+
+  // Live, location/time-aware context — falls back to defaults when geolocation is unavailable
+  const userContext = {
+    suburb: nearestSuburb?.suburb_name ?? nearestArea?.name ?? FALLBACK_CTX.suburb,
+    commute: homeLocation?.address ?? FALLBACK_CTX.commute,
+    riskTolerance: FALLBACK_CTX.riskTolerance,
+    coords: coords ?? null,
+    homeLocation: homeLocation ?? null,
+  };
 
   const [mode, setMode] = useState<'chat' | 'briefing' | 'route' | 'emergency'>(initialMode);
   const [messages, setMessages] = useState<Message[]>([]);

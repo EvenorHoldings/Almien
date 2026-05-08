@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { isInCapeTown } from '@/utils/mockDataValidator';
 
 export interface CrimeAlert {
   id: string;
@@ -91,7 +92,9 @@ function generateMockCrimeAlerts(): CrimeAlert[] {
       distance: Math.random() * 8,
       verified: Math.random() > 0.2,
     };
-  }).sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  })
+    .filter((a) => isInCapeTown(a.location))
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 }
 
 export const useAlmienStore = create<AlmienStore>()(
