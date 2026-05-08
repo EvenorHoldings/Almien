@@ -27,8 +27,11 @@ interface Message {
   timestamp: Date;
 }
 
-// Static fallbacks — overridden at runtime by store + geolocation
+// Static fallbacks — overridden at runtime inside SafiAI by store + geolocation
 const FALLBACK_CTX = { suburb: 'Sea Point', commute: 'CBD', riskTolerance: 'moderate' };
+// Backwards-compatible alias for sub-components (BriefingMode, RouteMode) that
+// don't yet have access to live geolocation context.
+const userContext = FALLBACK_CTX;
 
 const QUICK_PROMPTS = [
   'Is it safe to run at 6am?',
@@ -62,7 +65,7 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
 
   // Live, location/time-aware context — falls back to defaults when geolocation is unavailable
   const userContext = {
-    suburb: nearestSuburb?.name ?? nearestArea?.name ?? FALLBACK_CTX.suburb,
+    suburb: nearestSuburb?.suburb_name ?? nearestArea?.name ?? FALLBACK_CTX.suburb,
     commute: homeLocation?.address ?? FALLBACK_CTX.commute,
     riskTolerance: FALLBACK_CTX.riskTolerance,
     coords: coords ?? null,
