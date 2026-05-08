@@ -57,6 +57,17 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
   const toggleSafiVoiceReplies = useAlmienStore((s) => s.toggleSafiVoiceReplies);
   const safiHotwordEnabled = useAlmienStore((s) => s.safiHotwordEnabled);
   const toggleSafiHotword = useAlmienStore((s) => s.toggleSafiHotword);
+  const homeLocation = useAlmienStore((s) => s.userProfile?.homeLocation);
+  const { coords, nearestSuburb, nearestArea } = useUserLocation();
+
+  // Live, location/time-aware context — falls back to defaults when geolocation is unavailable
+  const userContext = {
+    suburb: nearestSuburb?.name ?? nearestArea?.name ?? FALLBACK_CTX.suburb,
+    commute: homeLocation?.address ?? FALLBACK_CTX.commute,
+    riskTolerance: FALLBACK_CTX.riskTolerance,
+    coords: coords ?? null,
+    homeLocation: homeLocation ?? null,
+  };
 
   const [mode, setMode] = useState<'chat' | 'briefing' | 'route' | 'emergency'>(initialMode);
   const [messages, setMessages] = useState<Message[]>([]);
