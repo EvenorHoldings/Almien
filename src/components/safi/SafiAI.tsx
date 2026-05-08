@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAlmienStore } from '@/stores/almienStore';
+import { useUserLocation } from '@/hooks/useUserLocation';
 import { useToast } from '@/hooks/use-toast';
 import type { ViewId } from '../dashboard/AlmienDashboard';
 
@@ -26,8 +27,8 @@ interface Message {
   timestamp: Date;
 }
 
-// User context — would normally come from profile/store
-const userContext = { suburb: 'Sea Point', commute: 'CBD', riskTolerance: 'moderate' };
+// Static fallbacks — overridden at runtime by store + geolocation
+const FALLBACK_CTX = { suburb: 'Sea Point', commute: 'CBD', riskTolerance: 'moderate' };
 
 const QUICK_PROMPTS = [
   'Is it safe to run at 6am?',
