@@ -6,6 +6,8 @@ import {
   MapPin, ZoomIn, ZoomOut, Locate, Table2, Map, Grid3X3, Shield, Cross
 } from 'lucide-react';
 import SafetyServicesLayer from './SafetyServicesLayer';
+import TrafficIncidentsLayer from './TrafficIncidentsLayer';
+import CameraDotsLayer from './CameraDotsLayer';
 import { cn } from '@/lib/utils';
 import { 
   MAP_CENTER, MAP_ZOOM, 
@@ -198,10 +200,14 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
     { id: 'wildfire', name: 'Wildfire (AFIS)', icon: AlertTriangle, color: '#ef4444', enabled: false, category: 'operations' },
     { id: 'saps', name: 'SAPS Stations', icon: Shield, color: '#00B8FF', enabled: false, category: 'operations' },
     { id: 'hospitals', name: 'Hospitals & Clinics', icon: Cross, color: '#7C3AED', enabled: false, category: 'operations' },
+    { id: 'traffic_inc', name: 'Traffic Incidents', icon: TrafficCone, color: '#FF9500', enabled: true, category: 'operations' },
+    { id: 'cameras', name: 'Traffic Cameras', icon: Camera, color: '#7C3AED', enabled: false, category: 'infrastructure' },
   ]);
 
   const showSaps = !!layers.find(l => l.id === 'saps')?.enabled;
   const showHospitals = !!layers.find(l => l.id === 'hospitals')?.enabled;
+  const showTrafficIncidents = !!layers.find(l => l.id === 'traffic_inc')?.enabled;
+  const showCameras = !!layers.find(l => l.id === 'cameras')?.enabled;
 
   // Handle map click - close panels
   const handleMapClick = useCallback(() => {
@@ -376,10 +382,14 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
 
           {/* SAPS Stations + Health Facilities */}
           <SafetyServicesLayer showSaps={showSaps} showHealth={showHospitals} />
-          
+
+          {/* Traffic incidents + low-opacity camera dots (i-TRAFFIC mock) */}
+          <TrafficIncidentsLayer visible={showTrafficIncidents} />
+          <CameraDotsLayer visible={showCameras} />
+
           {/* Ward Boundaries - Ward/Suburb level */}
-          <WardBoundariesLayer 
-            visible={showWardBoundaries} 
+          <WardBoundariesLayer
+            visible={showWardBoundaries}
             minZoom={11}
             onWardClick={handleWardClick}
             highlightedWards={comparisonHighlightedWards}
