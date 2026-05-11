@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { X, Zap, ShieldCheck, Hospital, Phone } from 'lucide-react';
 import { useLoadshedding, getStageColor } from '@/hooks/useLoadshedding';
-import { useSafetyMapServices } from '@/hooks/useSafetyMapServices';
+import { useSapsStations, useHealthFacilities } from '@/hooks/useSafetyMapServices';
 import { useUserLocation } from '@/hooks/useUserLocation';
 
 interface Props { open: boolean; onClose: () => void; }
@@ -16,7 +16,8 @@ function distKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }
 
 const LoadSheddingModal = ({ open, onClose }: Props) => {
   const { status } = useLoadshedding();
-  const { saps, hospitals } = useSafetyMapServices();
+  const { data: saps } = useSapsStations(open);
+  const { data: hospitals } = useHealthFacilities(open);
   const { coords } = useUserLocation();
   const [tick, setTick] = useState(0);
 
@@ -30,11 +31,11 @@ const LoadSheddingModal = ({ open, onClose }: Props) => {
   const lit = useMemo(() => {
     if (!coords) return [];
     const all = [
-      ...(hospitals ?? []).map((h) => ({ ...h, kind: 'hospital' as const })),
-      ...(saps ?? []).map((s) => ({ ...s, kind: 'saps' as const })),
+      ...(hospitals ?? []).map((h) => ({ id: h.id, name: h.name, lat: h.latitude, lng: h.longitude, phone: h.emergency_phone || h.phone, kind: 'hospital' as const })),
+      ...(saps ?? []).map((s) => ({ id: s.id, name: s.name, lat: s.latitude, lng: s.longitude, phone: s.phone, kind: 'saps' as const })),
     ].filter((p) => typeof p.lat === 'number' && typeof p.lng === 'number');
     return all
-      .map((p) => ({ ...p, d: distKm(coords, { lat: p.lat as number, lng: p.lng as number }) }))
+      .map((p) => ({ ...p, d: distKm(coords, { lat: p.lat, lng: p.lng }) }))
       .sort((a, b) => a.d - b.d)
       .slice(0, 4);
   }, [hospitals, saps, coords]);
@@ -127,8 +128,8 @@ const LoadSheddingModal = ({ open, onClose }: Props) => {
                   <div className="text-[12px] text-white truncate">{p.name}</div>
                   <div className="mono text-[10px]" style={{ color: '#A0A0A0' }}>{p.d.toFixed(1)} km · {p.kind === 'hospital' ? 'Hospital' : 'SAPS station'}</div>
                 </div>
-                {('phone' in p && (p as any).phone) && (
-                  <a href={`tel:${(p as any).phone}`} className="p-1.5" aria-label="Call">
+                {p.phone && (
+                  <a href={`tel:${p.phone}`} className="p-1.5" aria-label="Call">
                     <Phone size={14} color="#7C3AED" />
                   </a>
                 )}
