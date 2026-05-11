@@ -89,9 +89,9 @@ export default function AuthPage() {
           <div className="w-full max-w-md">
             <div
               className="border border-[#1A1A1A] bg-[#0A0A0A] p-6"
-              style={{ borderLeft: "2px solid #00FF85" }}
+              style={{ borderLeft: "2px solid #7C3AED" }}
             >
-              <div className="label-micro mb-2" style={{ color: "#00FF85" }}>
+              <div className="label-micro mb-2" style={{ color: "#7C3AED" }}>
                 [ AUTHENTICATED SESSION ]
               </div>
               <div
@@ -175,7 +175,7 @@ export default function AuthPage() {
         className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(0deg, #00FF85 0, #00FF85 1px, transparent 1px, transparent 4px)",
+            "repeating-linear-gradient(0deg, #7C3AED 0, #7C3AED 1px, transparent 1px, transparent 4px)",
         }}
       />
 
@@ -183,7 +183,7 @@ export default function AuthPage() {
         <div className="w-full max-w-md">
           {/* Header block */}
           <div className="mb-6">
-            <div className="flex items-center gap-2 label-micro mb-2" style={{ color: "#00FF85" }}>
+            <div className="flex items-center gap-2 label-micro mb-2" style={{ color: "#7C3AED" }}>
               <Shield className="w-3 h-3" />
               [ STAFF ACCESS · RESTRICTED ]
             </div>
@@ -207,7 +207,7 @@ export default function AuthPage() {
                 className="flex-1 py-2.5 text-xs font-bold tracking-wider uppercase transition-colors"
                 style={{
                   fontFamily: "JetBrains Mono, monospace",
-                  background: mode === m ? "#00FF85" : "transparent",
+                  background: mode === m ? "#7C3AED" : "transparent",
                   color: mode === m ? "#000" : "#666",
                 }}
               >
@@ -289,7 +289,7 @@ function TopBar({ tick, onBack }: { tick: string; onBack: () => void }) {
     <header className="relative z-20 flex items-center justify-between px-4 py-3 border-b border-[#1A1A1A] bg-black">
       <button
         onClick={onBack}
-        className="flex items-center gap-1.5 label-micro hover:text-[#00FF85] transition-colors"
+        className="flex items-center gap-1.5 label-micro hover:text-[#7C3AED] transition-colors"
         style={{ color: "#666" }}
       >
         <ArrowLeft className="w-3 h-3" /> BACK
@@ -297,7 +297,7 @@ function TopBar({ tick, onBack }: { tick: string; onBack: () => void }) {
       <div className="label-micro mono" style={{ color: "#666" }}>
         {tick}
       </div>
-      <div className="label-micro" style={{ color: "#00FF85" }}>
+      <div className="label-micro" style={{ color: "#7C3AED" }}>
         AUTH
       </div>
     </header>
@@ -312,7 +312,7 @@ function Spec({ label, value }: { label: string; value: string }) {
       </div>
       <div
         className="text-sm font-bold truncate mt-0.5"
-        style={{ color: "#00FF85", fontFamily: "JetBrains Mono, monospace" }}
+        style={{ color: "#7C3AED", fontFamily: "JetBrains Mono, monospace" }}
       >
         {value}
       </div>

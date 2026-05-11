@@ -72,7 +72,7 @@ const DEFAULT_LAYERS: ManagedLayer[] = [
 
   // User
   { id: 'user:reports', name: 'Citizen Reports', category: 'user', enabled: true, opacity: 1, zIndex: 240, color: '#f97316' },
-  { id: 'user:pins', name: 'My Pins', category: 'user', enabled: true, opacity: 1, zIndex: 250, color: '#00FF85' },
+  { id: 'user:pins', name: 'My Pins', category: 'user', enabled: true, opacity: 1, zIndex: 250, color: '#7C3AED' },
 
   // Analytics
   { id: 'analytics:heatmap', name: 'Crime Heatmap', category: 'analytics', enabled: false, opacity: 0.7, zIndex: 100, color: '#ef4444' },

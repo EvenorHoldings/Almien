@@ -42,7 +42,7 @@ const EntityDetailPanel = () => {
     <div className="space-y-3">
       <div className="border border-[#1A1A1A] bg-[#0A0A0A]">
         <div className="px-2 py-1.5 border-b border-[#1A1A1A] flex items-center justify-between">
-          <span className="font-mono text-[9px] tracking-[0.25em] text-[#00FF85]">
+          <span className="font-mono text-[9px] tracking-[0.25em] text-[#7C3AED]">
             {String(type).toUpperCase()}
           </span>
           <button
@@ -82,7 +82,7 @@ const EntityDetailPanel = () => {
       {coordinates && (
         <button
           onClick={focusOnMap}
-          className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#00FF85]/10 border border-[#00FF85]/40 hover:bg-[#00FF85]/20 text-[#00FF85] font-mono text-[10px] tracking-[0.2em] transition-colors"
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#7C3AED]/10 border border-[#7C3AED]/40 hover:bg-[#7C3AED]/20 text-[#7C3AED] font-mono text-[10px] tracking-[0.2em] transition-colors"
         >
           <Crosshair className="w-3.5 h-3.5" />
           FOCUS_ON_MAP
@@ -91,7 +91,7 @@ const EntityDetailPanel = () => {
 
       {/* Deep dive — fallback to existing intelligence sidebar */}
       <details className="border border-[#1A1A1A] bg-[#0A0A0A]">
-        <summary className="px-2 py-1.5 cursor-pointer font-mono text-[9px] tracking-[0.25em] text-[#00FF85]/80 hover:text-[#00FF85] flex items-center gap-1.5">
+        <summary className="px-2 py-1.5 cursor-pointer font-mono text-[9px] tracking-[0.25em] text-[#7C3AED]/80 hover:text-[#7C3AED] flex items-center gap-1.5">
           <Activity className="w-3 h-3" />
           DEEP_INTEL
         </summary>

@@ -53,14 +53,14 @@ const Welcome = () => {
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, #00FF85 0, #00FF85 1px, transparent 1px, transparent 4px)',
+            'repeating-linear-gradient(0deg, #7C3AED 0, #7C3AED 1px, transparent 1px, transparent 4px)',
         }}
       />
 
       {/* TOP STATUS STRIP */}
       <header className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-[#1A1A1A]">
-        <div className="flex items-center gap-2 label-micro" style={{ color: '#00FF85' }}>
-          <span className="inline-block w-1.5 h-1.5 bg-[#00FF85] animate-pulse" />
+        <div className="flex items-center gap-2 label-micro" style={{ color: '#7C3AED' }}>
+          <span className="inline-block w-1.5 h-1.5 bg-[#7C3AED] animate-pulse" />
           SYS_ONLINE
         </div>
         <div className="label-micro mono" style={{ color: '#666' }}>
@@ -74,7 +74,7 @@ const Welcome = () => {
       {/* Centered content */}
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 text-center">
         {/* Brand mark */}
-        <div className="label-micro mb-4" style={{ color: '#00FF85' }}>
+        <div className="label-micro mb-4" style={{ color: '#7C3AED' }}>
           [ URBAN INTELLIGENCE TERMINAL ]
         </div>
 
@@ -86,7 +86,7 @@ const Welcome = () => {
         </h1>
 
         {/* Acid green underline */}
-        <div className="mt-3 h-[2px] w-24 bg-[#00FF85]" />
+        <div className="mt-3 h-[2px] w-24 bg-[#7C3AED]" />
 
         <p
           className="mt-6 text-sm sm:text-base font-medium tracking-[0.3em] uppercase text-white/70"
@@ -111,7 +111,7 @@ const Welcome = () => {
               </div>
               <div
                 className="text-base font-bold mt-0.5"
-                style={{ color: '#00FF85', fontFamily: 'JetBrains Mono, monospace' }}
+                style={{ color: '#7C3AED', fontFamily: 'JetBrains Mono, monospace' }}
               >
                 {s.v}
               </div>
@@ -140,7 +140,7 @@ const Welcome = () => {
               {i > 0 && <span style={{ color: '#333' }}>·</span>}
               <a
                 href={link.href}
-                className="label-micro hover:text-[#00FF85] transition-colors"
+                className="label-micro hover:text-[#7C3AED] transition-colors"
                 style={{ color: '#666' }}
               >
                 {link.label}

@@ -56,7 +56,7 @@ const Segment = <T extends string>({
           className={cn(
             'px-1.5 py-1 font-mono text-[9px] tracking-[0.15em] transition-colors',
             value === opt.value
-              ? 'bg-[#00FF85]/15 text-[#00FF85]'
+              ? 'bg-[#7C3AED]/15 text-[#7C3AED]'
               : 'text-[#666] hover:text-[#aaa] hover:bg-[#151515]'
           )}
         >
@@ -72,10 +72,10 @@ const MapFilterBar = () => {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="font-mono text-[9px] tracking-[0.25em] text-[#00FF85]/80">FILTERS</span>
+        <span className="font-mono text-[9px] tracking-[0.25em] text-[#7C3AED]/80">FILTERS</span>
         <button
           onClick={reset}
-          className="font-mono text-[8px] tracking-[0.2em] text-[#555] hover:text-[#00FF85] transition-colors"
+          className="font-mono text-[8px] tracking-[0.2em] text-[#555] hover:text-[#7C3AED] transition-colors"
         >
           RESET
         </button>

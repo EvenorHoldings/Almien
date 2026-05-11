@@ -34,7 +34,7 @@ interface RouteOption {
   isSafest: boolean;
 }
 
-const SIG_GREEN = '#00FF85';
+const SIG_GREEN = '#7C3AED';
 const SIG_AMBER = '#FF9500';
 const SIG_RED   = '#FF3B30';
 const SIG_BLUE  = '#00B4D8';
@@ -110,7 +110,7 @@ function tacticalScoreTag(s: number) {
 
 /* ───────────────── tactical primitives ───────────────── */
 
-const SectionLabel = ({ children, color = '#00FF85' }: { children: React.ReactNode; color?: string }) => (
+const SectionLabel = ({ children, color = '#7C3AED' }: { children: React.ReactNode; color?: string }) => (
   <div className="flex items-center gap-1.5 mb-2">
     <span className="w-1 h-1" style={{ background: color }} />
     <span className="font-mono text-[10px] tracking-[0.2em]" style={{ color }}>{children}</span>
@@ -237,12 +237,12 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
           </div>
 
           <div className="flex items-center gap-2 pt-3 mt-3 border-t border-[#1A1A1A]">
-            <Share2 className="w-3.5 h-3.5 text-[#00FF85]" />
+            <Share2 className="w-3.5 h-3.5 text-[#7C3AED]" />
             <div className="flex-1">
               <div className="font-mono text-[10px] tracking-[0.15em] text-white">LIVE_TRACKING · BROADCAST</div>
               <div className="font-mono text-[9px] tracking-[0.15em] text-[#777]">3 contacts · live position</div>
             </div>
-            <Check className="w-4 h-4 text-[#00FF85]" />
+            <Check className="w-4 h-4 text-[#7C3AED]" />
           </div>
 
           {deviationAlert && (
@@ -265,11 +265,11 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
         {/* Live map */}
         <div className="relative bg-[#0A0A0A] border border-[#2A2A2A] overflow-hidden h-64">
           <div className="absolute inset-0 opacity-[0.06]" style={{
-            backgroundImage: 'linear-gradient(to right, #00FF85 1px, transparent 1px), linear-gradient(to bottom, #00FF85 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(to right, #7C3AED 1px, transparent 1px), linear-gradient(to bottom, #7C3AED 1px, transparent 1px)',
             backgroundSize: '32px 32px',
           }} />
           <div className="absolute top-2 left-2 right-2 flex items-center justify-between">
-            <span className="font-mono text-[9px] tracking-[0.2em] text-[#00FF85]">LIVE_MAP</span>
+            <span className="font-mono text-[9px] tracking-[0.2em] text-[#7C3AED]">LIVE_MAP</span>
             <span className="font-mono text-[9px] tracking-[0.2em] text-[#555] truncate ml-2">
               {origin.toUpperCase()} → {destination.toUpperCase()}
             </span>
@@ -309,11 +309,11 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
       {/* Header */}
       <div className="border-b border-[#1A1A1A] pb-3">
         <div className="flex items-center gap-2 mb-1">
-          <span className="w-1.5 h-1.5 bg-[#00FF85] animate-pulse" />
-          <span className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]">ROUTE_LAYER · v2.0</span>
+          <span className="w-1.5 h-1.5 bg-[#7C3AED] animate-pulse" />
+          <span className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]">ROUTE_LAYER · v2.0</span>
         </div>
         <h1 className="font-[family-name:'Space_Grotesk'] text-2xl font-bold tracking-tight text-white">
-          PLAN<span className="text-[#00FF85]">.</span>SAFE_ROUTE
+          PLAN<span className="text-[#7C3AED]">.</span>SAFE_ROUTE
         </h1>
         <p className="font-mono text-[11px] text-[#999] mt-1">
           Tactical corridor analysis · Western Cape · Time-aware risk
@@ -362,7 +362,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                 className={cn(
                   'flex flex-col items-center justify-center py-3 transition-colors min-h-[64px]',
                   active
-                    ? 'bg-[#00FF85] text-black'
+                    ? 'bg-[#7C3AED] text-black'
                     : 'bg-[#0A0A0A] text-[#999] hover:text-white hover:bg-[#111]',
                 )}
               >
@@ -387,7 +387,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                 className={cn(
                   'flex-1 py-2 font-mono text-[10px] tracking-[0.2em] font-bold transition-colors min-h-[36px]',
                   active
-                    ? 'bg-[#00FF85] text-black'
+                    ? 'bg-[#7C3AED] text-black'
                     : 'bg-[#0A0A0A] text-[#999] hover:text-white hover:bg-[#111]',
                 )}
               >
@@ -401,7 +401,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
           <div className="grid grid-cols-2 gap-2 animate-fade-in">
             <Popover>
               <PopoverTrigger asChild>
-                <button className="bg-[#0A0A0A] border border-[#2A2A2A] hover:border-[#00FF85] py-2.5 px-3 font-mono text-[11px] tracking-[0.1em] text-white text-left transition-colors min-h-[40px]">
+                <button className="bg-[#0A0A0A] border border-[#2A2A2A] hover:border-[#7C3AED] py-2.5 px-3 font-mono text-[11px] tracking-[0.1em] text-white text-left transition-colors min-h-[40px]">
                   {customDate ? format(customDate, 'yyyy-MM-dd').toUpperCase() : '── PICK_DATE ──'}
                 </button>
               </PopoverTrigger>
@@ -418,7 +418,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
               type="time"
               value={customTime}
               onChange={e => setCustomTime(e.target.value)}
-              className="bg-[#0A0A0A] border border-[#2A2A2A] focus:border-[#00FF85] py-2.5 px-3 font-mono text-[11px] tracking-[0.1em] text-white outline-none transition-colors min-h-[40px]"
+              className="bg-[#0A0A0A] border border-[#2A2A2A] focus:border-[#7C3AED] py-2.5 px-3 font-mono text-[11px] tracking-[0.1em] text-white outline-none transition-colors min-h-[40px]"
             />
           </div>
         )}
@@ -441,7 +441,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
           'w-full min-h-[52px] font-mono text-[11px] tracking-[0.2em] font-bold flex items-center justify-center gap-2 transition-all',
           calculating
             ? 'bg-[#1A1A1A] text-[#555] cursor-wait'
-            : 'bg-[#00FF85] text-black hover:bg-[#00CC6A] active:scale-99',
+            : 'bg-[#7C3AED] text-black hover:bg-[#6D28D9] active:scale-99',
         )}
       >
         {calculating ? (
@@ -456,8 +456,8 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
         <div className="space-y-3 animate-fade-in pt-2">
           <div className="flex items-center justify-between border-b border-[#1A1A1A] pb-2">
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-[#00FF85]" />
-              <span className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]">
+              <span className="w-1.5 h-1.5 bg-[#7C3AED]" />
+              <span className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]">
                 ROUTES // {routes.length}_FOUND
               </span>
             </div>
@@ -469,7 +469,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
           {/* Tactical map preview */}
           <div className="relative bg-[#0A0A0A] border border-[#2A2A2A] overflow-hidden h-48">
             <div className="absolute inset-0 opacity-[0.06]" style={{
-              backgroundImage: 'linear-gradient(to right, #00FF85 1px, transparent 1px), linear-gradient(to bottom, #00FF85 1px, transparent 1px)',
+              backgroundImage: 'linear-gradient(to right, #7C3AED 1px, transparent 1px), linear-gradient(to bottom, #7C3AED 1px, transparent 1px)',
               backgroundSize: '32px 32px',
             }} />
             <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 192">
@@ -517,7 +517,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="font-mono text-[9px] tracking-[0.2em]" style={{ color }}>{tag}</span>
                       {route.isSafest && (
-                        <span className="font-mono text-[9px] tracking-[0.2em] bg-[#00FF85] text-black px-1.5 py-px font-bold">
+                        <span className="font-mono text-[9px] tracking-[0.2em] bg-[#7C3AED] text-black px-1.5 py-px font-bold">
                           RECOMMENDED
                         </span>
                       )}
@@ -589,7 +589,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                     className={cn(
                       'flex-1 flex items-center justify-center gap-1.5 py-3 font-mono text-[10px] tracking-[0.2em] font-bold transition-colors min-h-[40px]',
                       route.isSafest
-                        ? 'bg-[#00FF85] text-black hover:bg-[#00CC6A]'
+                        ? 'bg-[#7C3AED] text-black hover:bg-[#6D28D9]'
                         : 'bg-[#0A0A0A] text-white hover:bg-[#111]',
                     )}
                   >
@@ -597,7 +597,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                   </button>
                   <button
                     onClick={() => toast.success('SHARE_LINK · COPIED', { description: 'Live tracking URL on clipboard.' })}
-                    className="px-4 bg-[#0A0A0A] text-[#999] hover:text-[#00FF85] hover:bg-[#111] transition-colors flex items-center justify-center"
+                    className="px-4 bg-[#0A0A0A] text-[#999] hover:text-[#7C3AED] hover:bg-[#111] transition-colors flex items-center justify-center"
                     aria-label="Share journey"
                   >
                     <Share2 className="w-3.5 h-3.5" />

@@ -65,7 +65,7 @@ const newId = () =>
     ? crypto.randomUUID()
     : `ovl_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
-const SIGNAL = '#00FF85';
+const SIGNAL = '#7C3AED';
 
 export const useDrawingStore = create<DrawingState>()(
   persist(

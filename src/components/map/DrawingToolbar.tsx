@@ -22,7 +22,7 @@ const DrawingToolbar = () => {
 
   return (
     <div className="absolute left-2 top-1/2 -translate-y-1/2 z-[1000] flex flex-col gap-1 hidden md:flex pointer-events-auto">
-      <div className="font-mono text-[8px] tracking-[0.25em] text-[#00FF85]/80 px-1 pb-1">
+      <div className="font-mono text-[8px] tracking-[0.25em] text-[#7C3AED]/80 px-1 pb-1">
         DRAW
       </div>
       {TOOLS.map(({ id, icon: Icon, label }) => {
@@ -37,8 +37,8 @@ const DrawingToolbar = () => {
             className={cn(
               'p-2 border bg-black/85 backdrop-blur-sm transition-colors',
               active
-                ? 'border-[#00FF85] text-[#00FF85]'
-                : 'border-[#1A1A1A] text-[#aaa] hover:border-[#00FF85]/50 hover:text-[#00FF85]'
+                ? 'border-[#7C3AED] text-[#7C3AED]'
+                : 'border-[#1A1A1A] text-[#aaa] hover:border-[#7C3AED]/50 hover:text-[#7C3AED]'
             )}
           >
             <Icon className="w-4 h-4" />
@@ -52,7 +52,7 @@ const DrawingToolbar = () => {
             onClick={() => finishPolygon()}
             disabled={polygonDraft.length < 3}
             aria-label="Finish polygon"
-            className="p-2 border border-[#00FF85]/60 bg-[#00FF85]/10 text-[#00FF85] disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-2 border border-[#7C3AED]/60 bg-[#7C3AED]/10 text-[#7C3AED] disabled:opacity-30 disabled:cursor-not-allowed"
             title="Finish polygon (need 3+ points)"
           >
             <Check className="w-4 h-4" />

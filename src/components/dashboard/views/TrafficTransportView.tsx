@@ -73,7 +73,7 @@ const TrafficTransportView = memo(({ onUpgrade }: Props) => {
     if (currentHour >= 16 && currentHour <= 19) t.push({ icon: Shield, color: '#FF3B30', text: 'Evening peak — share route with guardian' });
     if (currentHour >= 20 || currentHour <= 5) t.push({ icon: Moon, color: '#00B4D8', text: 'After dark — SOS guardian active, hold 2s if unsafe' });
     t.push({ icon: Zap, color: '#FF9500', text: 'Avoid unlit routes during load-shedding' });
-    t.push({ icon: Shield, color: '#00FF85', text: 'Scan your corridor before every trip' });
+    t.push({ icon: Shield, color: '#7C3AED', text: 'Scan your corridor before every trip' });
     return t.slice(0, 5);
   }, [currentHour]);
 
@@ -89,10 +89,10 @@ const TrafficTransportView = memo(({ onUpgrade }: Props) => {
       </div>
 
       {/* WHY IT MATTERS */}
-      <div className="bg-[#0A0A0A] border border-[#1F1F1F] border-l-2 border-l-[#00FF85] p-4">
+      <div className="bg-[#0A0A0A] border border-[#1F1F1F] border-l-2 border-l-[#7C3AED] p-4">
         <div className="flex items-center gap-1.5 mb-2">
-          <Info className="w-3 h-3 text-[#00FF85]" />
-          <span className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]">WHY TRAFFIC & TRANSPORT</span>
+          <Info className="w-3 h-3 text-[#7C3AED]" />
+          <span className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]">WHY TRAFFIC & TRANSPORT</span>
         </div>
         <p className="text-[13px] text-[#999] leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
           Crime spikes during peak commute hours. Load-shedding disables traffic lights. This tab gives you real-time context to make safer travel decisions.
@@ -132,7 +132,7 @@ const TrafficTransportView = memo(({ onUpgrade }: Props) => {
                   <Cell
                     key={i}
                     fill={d.v >= 65 ? '#FF3B30' : d.v >= 50 ? '#FF9500' : '#2A2A2A'}
-                    stroke={String(currentHour).padStart(2, '0') === d.h ? '#00FF85' : 'none'}
+                    stroke={String(currentHour).padStart(2, '0') === d.h ? '#7C3AED' : 'none'}
                     strokeWidth={String(currentHour).padStart(2, '0') === d.h ? 2 : 0}
                   />
                 ))}
@@ -185,7 +185,7 @@ const TrafficTransportView = memo(({ onUpgrade }: Props) => {
           style={{
             background: 'transparent',
             border: '1px solid #2A2A2A',
-            color: '#00FF85',
+            color: '#7C3AED',
             fontFamily: 'JetBrains Mono, monospace',
             fontSize: 10,
             letterSpacing: '0.15em',

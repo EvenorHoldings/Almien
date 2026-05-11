@@ -146,7 +146,7 @@ const MapFirstLayout = () => {
                 >
                   <div className="relative h-full flex flex-col">
                     <div className="flex items-center justify-between px-2 pt-2 pb-1">
-                      <span className="font-mono text-[9px] tracking-[0.25em] text-[#00FF85]/80">CONTROL_HUB</span>
+                      <span className="font-mono text-[9px] tracking-[0.25em] text-[#7C3AED]/80">CONTROL_HUB</span>
                       <button
                         onClick={() => setLeftCollapsed(true)}
                         className="p-1 rounded-md bg-muted/50 hover:bg-muted transition-colors"
@@ -188,18 +188,18 @@ const MapFirstLayout = () => {
                   <button
                     onClick={() => setLeftCollapsed(false)}
                     aria-label="Expand left panel"
-                    className="absolute left-2 top-1/2 -translate-y-1/2 z-[1100] p-2 bg-black/85 border border-[#1A1A1A] hover:border-[#00FF85]/50 transition-colors"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 z-[1100] p-2 bg-black/85 border border-[#1A1A1A] hover:border-[#7C3AED]/50 transition-colors"
                   >
-                    <PanelLeftOpen className="w-4 h-4 text-[#00FF85]" />
+                    <PanelLeftOpen className="w-4 h-4 text-[#7C3AED]" />
                   </button>
                 )}
                 {rightCollapsed && (
                   <button
                     onClick={() => setRightCollapsed(false)}
                     aria-label="Expand right panel"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 z-[1100] p-2 bg-black/85 border border-[#1A1A1A] hover:border-[#00FF85]/50 transition-colors"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 z-[1100] p-2 bg-black/85 border border-[#1A1A1A] hover:border-[#7C3AED]/50 transition-colors"
                   >
-                    <PanelRightOpen className="w-4 h-4 text-[#00FF85]" />
+                    <PanelRightOpen className="w-4 h-4 text-[#7C3AED]" />
                   </button>
                 )}
 
@@ -235,7 +235,7 @@ const MapFirstLayout = () => {
                 >
                   <div className="relative h-full flex flex-col">
                     <div className="flex items-center justify-between px-2 pt-2 pb-1">
-                      <span className="font-mono text-[9px] tracking-[0.25em] text-[#00FF85]/80">
+                      <span className="font-mono text-[9px] tracking-[0.25em] text-[#7C3AED]/80">
                         {selectedEntity && selectedEntity.type !== 'area' ? 'ENTITY_DETAIL' : 'LIVE_FEED'}
                       </span>
                       <button

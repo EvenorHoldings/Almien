@@ -19,7 +19,7 @@ interface Props {
 }
 
 /* ───────────── Tactical risk palette ───────────── */
-const SIG_GREEN = '#00FF85';
+const SIG_GREEN = '#7C3AED';
 const SIG_AMBER = '#FF9500';
 const SIG_RED   = '#FF3B30';
 const SIG_BLUE  = '#00B4D8';
@@ -88,7 +88,7 @@ const mockZones: ZoneData[] = [
 ];
 
 const zoneRiskFill: Record<string, string> = {
-  low:      'border-[color:var(--sig-green,#00FF85)] bg-[color:rgba(0,255,133,0.06)]',
+  low:      'border-[color:var(--sig-green,#7C3AED)] bg-[color:rgba(0,255,133,0.06)]',
   elevated: 'border-[color:var(--sig-amber,#FF9500)] bg-[color:rgba(255,149,0,0.06)]',
   high:     'border-[color:var(--sig-red,#FF6B00)] bg-[color:rgba(255,107,0,0.06)]',
   critical: 'border-[color:var(--sig-red,#FF3B30)] bg-[color:rgba(255,59,48,0.10)]',
@@ -99,13 +99,13 @@ const zoneRiskFill: Record<string, string> = {
    ═══════════════════════════════════════════ */
 const FirstVisitModal = memo(({ onClose }: { onClose: () => void }) => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in">
-    <div className="bg-[#0A0A0A] border border-[#2A2A2A] border-l-2 border-l-[#00FF85] max-w-sm w-full p-6 shadow-2xl">
+    <div className="bg-[#0A0A0A] border border-[#2A2A2A] border-l-2 border-l-[#7C3AED] max-w-sm w-full p-6 shadow-2xl">
       <div className="flex items-center justify-between mb-4">
-        <span className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]">SYS_BOOT // MAP_LAYER</span>
+        <span className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]">SYS_BOOT // MAP_LAYER</span>
         <span className="font-mono text-[10px] tracking-[0.2em] text-[#555]">v2.0</span>
       </div>
       <h2 className="font-[family-name:'Space_Grotesk'] text-2xl font-bold text-white tracking-tight mb-1">
-        ALMIEN<span className="text-[#00FF85]">.</span>MAP
+        ALMIEN<span className="text-[#7C3AED]">.</span>MAP
       </h2>
       <p className="font-mono text-[11px] text-[#999] mb-5 leading-relaxed">
         Tactical overlay for South African urban risk. SAPS feed + verified citizen mesh.
@@ -117,7 +117,7 @@ const FirstVisitModal = memo(({ onClose }: { onClose: () => void }) => (
           { tag: 'ROUTE', text: 'Time-aware safe path planner' },
         ].map((item) => (
           <div key={item.tag} className="flex items-baseline gap-3 font-mono text-[11px]">
-            <span className="text-[#00FF85] tracking-[0.15em] w-12 shrink-0">{item.tag}</span>
+            <span className="text-[#7C3AED] tracking-[0.15em] w-12 shrink-0">{item.tag}</span>
             <span className="text-[#CCC]">{item.text}</span>
           </div>
         ))}
@@ -135,11 +135,11 @@ FirstVisitModal.displayName = 'FirstVisitModal';
    ═══════════════════════════════════════════ */
 const MapLoadingSkeleton = memo(() => (
   <div className="absolute inset-0 z-40 bg-black flex flex-col items-center justify-center gap-4 animate-fade-in">
-    <div className="font-mono text-[10px] tracking-[0.25em] text-[#00FF85] animate-pulse">
+    <div className="font-mono text-[10px] tracking-[0.25em] text-[#7C3AED] animate-pulse">
       ◉ ACQUIRING_TILES
     </div>
     <div className="w-48 h-px bg-[#1A1A1A] overflow-hidden">
-      <div className="h-full bg-[#00FF85] animate-[data-stream_1.4s_linear_infinite]" style={{ width: '40%' }} />
+      <div className="h-full bg-[#7C3AED] animate-[data-stream_1.4s_linear_infinite]" style={{ width: '40%' }} />
     </div>
     <div className="font-mono text-[9px] tracking-[0.2em] text-[#555]">
       SAPS · CITIZEN · WEATHER · LOAD-SHED
@@ -175,7 +175,7 @@ const GuestBar = memo(({ onLogin }: { onLogin: () => void }) => (
       </div>
       <button
         onClick={onLogin}
-        className="flex items-center gap-1.5 px-2.5 py-1 bg-[#00FF85] text-black font-mono text-[10px] tracking-[0.15em] font-bold hover:bg-[#00CC6A] transition-colors min-h-[28px]"
+        className="flex items-center gap-1.5 px-2.5 py-1 bg-[#7C3AED] text-black font-mono text-[10px] tracking-[0.15em] font-bold hover:bg-[#6D28D9] transition-colors min-h-[28px]"
       >
         <LogIn className="w-3 h-3" /> AUTH
       </button>
@@ -278,7 +278,7 @@ const SelectedAreaOverlay = memo(({ area, onClose }: { area: AreaData; onClose: 
             <Shield className="w-3 h-3 text-[#00B4D8]" />
             <span className="font-mono text-[10px] tracking-[0.15em] text-[#999]">{area.policeStation}</span>
           </div>
-          <span className="font-mono text-[10px] tracking-[0.15em] text-[#00FF85] font-bold">→ {area.policeNumber}</span>
+          <span className="font-mono text-[10px] tracking-[0.15em] text-[#7C3AED] font-bold">→ {area.policeNumber}</span>
         </a>
       </div>
     </div>
@@ -296,7 +296,7 @@ const TacticalGrid = memo(() => (
       className="absolute inset-0 opacity-[0.06]"
       style={{
         backgroundImage:
-          'linear-gradient(to right, #00FF85 1px, transparent 1px), linear-gradient(to bottom, #00FF85 1px, transparent 1px)',
+          'linear-gradient(to right, #7C3AED 1px, transparent 1px), linear-gradient(to bottom, #7C3AED 1px, transparent 1px)',
         backgroundSize: '40px 40px',
       }}
     />
@@ -304,14 +304,14 @@ const TacticalGrid = memo(() => (
     <div
       className="absolute inset-0 opacity-[0.04]"
       style={{
-        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0, transparent 2px, #00FF85 2px, #00FF85 3px)',
+        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0, transparent 2px, #7C3AED 2px, #7C3AED 3px)',
       }}
     />
     {/* corner crosshairs */}
-    <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-[#00FF85]/40" />
-    <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-[#00FF85]/40" />
-    <div className="absolute bottom-2 left-2 w-3 h-3 border-l border-b border-[#00FF85]/40" />
-    <div className="absolute bottom-2 right-2 w-3 h-3 border-r border-b border-[#00FF85]/40" />
+    <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-[#7C3AED]/40" />
+    <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-[#7C3AED]/40" />
+    <div className="absolute bottom-2 left-2 w-3 h-3 border-l border-b border-[#7C3AED]/40" />
+    <div className="absolute bottom-2 right-2 w-3 h-3 border-r border-b border-[#7C3AED]/40" />
   </div>
 ));
 TacticalGrid.displayName = 'TacticalGrid';
@@ -487,11 +487,11 @@ const MapFullView = memo(({ onNavigate }: Props) => {
         {/* Center crosshair when no overlays */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[6] pointer-events-none flex flex-col items-center">
           <div className="relative w-10 h-10">
-            <div className="absolute top-1/2 left-0 right-0 h-px bg-[#00FF85]/50" />
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#00FF85]/50" />
-            <div className="absolute inset-0 border border-[#00FF85]/40" />
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-[#7C3AED]/50" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#7C3AED]/50" />
+            <div className="absolute inset-0 border border-[#7C3AED]/40" />
           </div>
-          <div className="mt-2 font-mono text-[9px] tracking-[0.2em] text-[#00FF85]/60">
+          <div className="mt-2 font-mono text-[9px] tracking-[0.2em] text-[#7C3AED]/60">
             MAP_LAYER · LIVE
           </div>
         </div>
@@ -500,8 +500,8 @@ const MapFullView = memo(({ onNavigate }: Props) => {
       {/* ═══ TOP TACTICAL HEADER ═══ */}
       <div className="absolute top-0 left-0 right-0 z-[26] flex items-center justify-between px-3 py-1.5 bg-black/80 backdrop-blur border-b border-[#1A1A1A]">
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-[#00FF85] animate-pulse" />
-          <span className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]">MAP_LAYER</span>
+          <span className="w-1.5 h-1.5 bg-[#7C3AED] animate-pulse" />
+          <span className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]">MAP_LAYER</span>
           <span className="font-mono text-[10px] tracking-[0.2em] text-[#555]">·</span>
           <span className="font-mono text-[10px] tracking-[0.2em] text-[#999]">{riskAtSlot.label}</span>
         </div>
@@ -538,23 +538,23 @@ const MapFullView = memo(({ onNavigate }: Props) => {
       {/* ═══ HUD CONTROLS — square tactical buttons (right rail) ═══ */}
       <div className="absolute top-[100px] right-3 z-20 flex flex-col">
         <button
-          className="w-9 h-9 bg-[#0A0A0A]/95 backdrop-blur border border-[#2A2A2A] flex items-center justify-center hover:border-[#00FF85] active:bg-[#111] transition-colors"
+          className="w-9 h-9 bg-[#0A0A0A]/95 backdrop-blur border border-[#2A2A2A] flex items-center justify-center hover:border-[#7C3AED] active:bg-[#111] transition-colors"
           aria-label="Zoom in"
         >
           <Plus className="w-3.5 h-3.5 text-white" />
         </button>
         <button
-          className="w-9 h-9 bg-[#0A0A0A]/95 backdrop-blur border border-[#2A2A2A] border-t-0 flex items-center justify-center hover:border-[#00FF85] active:bg-[#111] transition-colors"
+          className="w-9 h-9 bg-[#0A0A0A]/95 backdrop-blur border border-[#2A2A2A] border-t-0 flex items-center justify-center hover:border-[#7C3AED] active:bg-[#111] transition-colors"
           aria-label="Zoom out"
         >
           <Minus className="w-3.5 h-3.5 text-white" />
         </button>
         <button
           onClick={handleLocateMe}
-          className="w-9 h-9 bg-[#0A0A0A]/95 backdrop-blur border border-[#00FF85]/50 border-t-0 flex items-center justify-center hover:bg-[#00FF85]/10 active:scale-95 transition-all mt-1"
+          className="w-9 h-9 bg-[#0A0A0A]/95 backdrop-blur border border-[#7C3AED]/50 border-t-0 flex items-center justify-center hover:bg-[#7C3AED]/10 active:scale-95 transition-all mt-1"
           aria-label="Locate me"
         >
-          <Crosshair className="w-3.5 h-3.5 text-[#00FF85]" />
+          <Crosshair className="w-3.5 h-3.5 text-[#7C3AED]" />
         </button>
         <button
           onClick={() => {
@@ -644,8 +644,8 @@ const MapFullView = memo(({ onNavigate }: Props) => {
           <div>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-1.5">
-                <Clock className="w-3 h-3 text-[#00FF85]" />
-                <span className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]">TIME_SCRUB</span>
+                <Clock className="w-3 h-3 text-[#7C3AED]" />
+                <span className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]">TIME_SCRUB</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-mono text-[10px] tracking-[0.15em] text-white tabular-nums">{riskAtSlot.label}</span>
@@ -699,8 +699,8 @@ const MapFullView = memo(({ onNavigate }: Props) => {
                     className={cn(
                       'px-2.5 py-1 font-mono text-[10px] tracking-[0.15em] font-bold border min-h-[28px] transition-colors',
                       active
-                        ? 'bg-[#00FF85] text-black border-[#00FF85]'
-                        : 'bg-transparent text-[#999] border-[#2A2A2A] hover:border-[#00FF85] hover:text-white',
+                        ? 'bg-[#7C3AED] text-black border-[#7C3AED]'
+                        : 'bg-transparent text-[#999] border-[#2A2A2A] hover:border-[#7C3AED] hover:text-white',
                     )}
                   >
                     {p.label}
@@ -724,8 +724,8 @@ const MapFullView = memo(({ onNavigate }: Props) => {
                 className={cn(
                   'px-2.5 py-1 font-mono text-[10px] tracking-[0.15em] font-bold whitespace-nowrap shrink-0 border min-h-[28px] transition-colors',
                   activeFilter === f.id
-                    ? 'bg-[#00FF85] text-black border-[#00FF85]'
-                    : 'bg-transparent text-[#999] border-[#2A2A2A] hover:border-[#00FF85] hover:text-white',
+                    ? 'bg-[#7C3AED] text-black border-[#7C3AED]'
+                    : 'bg-transparent text-[#999] border-[#2A2A2A] hover:border-[#7C3AED] hover:text-white',
                 )}
               >
                 {f.label}

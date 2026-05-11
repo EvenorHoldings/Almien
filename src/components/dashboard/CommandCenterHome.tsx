@@ -140,13 +140,13 @@ const CommandCenterHome = memo(({ onNavigate, onOpenSafi }: Props) => {
         />
         <QuickAction
           Icon={Navigation}
-          color="#00FF85"
+          color="#7C3AED"
           label="Safe Route"
           onClick={() => onNavigate('safe-route')}
         />
         <QuickAction
           Icon={Radio}
-          color="#00FF85"
+          color="#7C3AED"
           label="Network"
           onClick={() => onNavigate('community')}
         />

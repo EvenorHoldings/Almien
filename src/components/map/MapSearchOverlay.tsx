@@ -58,9 +58,9 @@ const MapSearchOverlay = ({ onSelect, className }: Props) => {
       }
       role="search"
     >
-      <div className="bg-black/85 backdrop-blur border border-[#1A1A1A] hover:border-[#00FF85]/40 focus-within:border-[#00FF85]/60 transition-colors">
+      <div className="bg-black/85 backdrop-blur border border-[#1A1A1A] hover:border-[#7C3AED]/40 focus-within:border-[#7C3AED]/60 transition-colors">
         <div className="flex items-center justify-between px-2 pt-1.5">
-          <span className="font-mono text-[9px] tracking-[0.2em] text-[#00FF85]/80">
+          <span className="font-mono text-[9px] tracking-[0.2em] text-[#7C3AED]/80">
             GLOBAL_SEARCH
           </span>
           <span className="font-mono text-[8px] tracking-[0.2em] text-[#555]">
@@ -81,7 +81,7 @@ const MapSearchOverlay = ({ onSelect, className }: Props) => {
               className={cn(
                 'shrink-0 px-2 py-1 font-mono text-[9px] tracking-[0.15em] transition-colors',
                 dataType === chip.value
-                  ? 'bg-[#00FF85]/15 text-[#00FF85]'
+                  ? 'bg-[#7C3AED]/15 text-[#7C3AED]'
                   : 'text-[#666] hover:text-[#aaa] hover:bg-[#151515]'
               )}
               aria-pressed={dataType === chip.value}

@@ -14,7 +14,7 @@ interface Props {
 /* ─── Avatar helpers ─────────────────────── */
 function getAvatarColor(name: string): { bg: string; fg: string } {
   const c = (name[0] || 'A').toUpperCase();
-  if (c <= 'E') return { bg: '#003D1F', fg: '#00FF85' };
+  if (c <= 'E') return { bg: '#2E1065', fg: '#7C3AED' };
   if (c <= 'J') return { bg: '#00243A', fg: '#00B4D8' };
   if (c <= 'O') return { bg: '#1A0A00', fg: '#FF9500' };
   if (c <= 'T') return { bg: '#1A0000', fg: '#FF3B30' };
@@ -39,13 +39,13 @@ const SECTIONS: { title: string; rows: MenuRow[] }[] = [
     rows: [
       { id: 's1', label: 'Safi AI Concierge', sub: 'Personal safety assistant', icon: Cpu, color: '#00B4D8', view: 'safi-history' },
       { id: 's2', label: 'Alert Preferences', sub: 'Notification rules', icon: Bell, color: '#FF9500', view: 'alerts' },
-      { id: 's3', label: 'Safe Zones', sub: 'Manage trusted areas', icon: Shield, color: '#00FF85', view: 'safety-network' },
+      { id: 's3', label: 'Safe Zones', sub: 'Manage trusted areas', icon: Shield, color: '#7C3AED', view: 'safety-network' },
     ],
   },
   {
     title: 'NETWORK',
     rows: [
-      { id: 'n1', label: 'My Guardians', sub: '5 verified contacts', icon: Users, color: '#00FF85', view: 'community' },
+      { id: 'n1', label: 'My Guardians', sub: '5 verified contacts', icon: Users, color: '#7C3AED', view: 'community' },
       { id: 'n2', label: 'Panic Network', sub: 'Hold-to-activate · 2s', icon: Radio, color: '#FF3B30', view: 'community' },
     ],
   },
@@ -89,7 +89,7 @@ const ScoreTerminal = memo(({ score, alerts, routes, trust }: {
         <span className="mono" style={{ fontSize: 10, color: '#555', letterSpacing: '0.1em' }}>
           GUARDIAN_RISK_ENGINE v2.1
         </span>
-        <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00FF85' }} />
+        <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#7C3AED' }} />
       </div>
       <div className="mt-3" style={{ height: 1, background: '#1A1A1A' }} />
 
@@ -115,7 +115,7 @@ const ScoreTerminal = memo(({ score, alerts, routes, trust }: {
       <div className="mt-4 w-full" style={{ height: 2, background: '#111' }}>
         <div
           style={{
-            width: `${fillPct}%`, height: '100%', background: '#00FF85',
+            width: `${fillPct}%`, height: '100%', background: '#7C3AED',
             transition: 'width 1s ease-out',
           }}
         />
@@ -205,7 +205,7 @@ const NeuralMeView = memo(({ onNavigate, onUpgrade }: Props) => {
               className="absolute"
               style={{
                 right: 0, bottom: 0, width: 14, height: 14,
-                background: '#00FF85', border: '2px solid #0A0A0A',
+                background: '#7C3AED', border: '2px solid #0A0A0A',
               }}
               aria-label="Plan active"
             />
@@ -258,7 +258,7 @@ const NeuralMeView = memo(({ onNavigate, onUpgrade }: Props) => {
                 fontFamily: 'JetBrains Mono, monospace',
                 fontSize: 11,
                 lineHeight: 1.7,
-                color: line.positive ? '#00FF85' : '#FF3B30',
+                color: line.positive ? '#7C3AED' : '#FF3B30',
               }}
             >
               <span style={{ color: '#333' }}>{line.ts}</span>

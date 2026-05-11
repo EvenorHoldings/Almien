@@ -17,10 +17,10 @@ export default {
         // ── Obsidian Tactical palette ──
         void: '#000000',
         signal: {
-          DEFAULT: '#00FF85',
-          green: '#00FF85',
-          dim: '#00CC6A',
-          dark: '#003D1F',
+          DEFAULT: '#7C3AED',
+          green: '#7C3AED',
+          dim: '#6D28D9',
+          dark: '#2E1065',
         },
         threat: {
           DEFAULT: '#FF3B30',

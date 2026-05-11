@@ -119,21 +119,21 @@ const MapControls = ({ onMapInteraction }: { onMapInteraction?: () => void }) =>
       <button
         onClick={() => { map.zoomIn(); onMapInteraction?.(); }}
         aria-label="Zoom in"
-        className="p-2 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF85] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
+        className="p-2 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
       >
         <ZoomIn className="w-4 h-4" />
       </button>
       <button
         onClick={() => { map.zoomOut(); onMapInteraction?.(); }}
         aria-label="Zoom out"
-        className="p-2 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF85] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
+        className="p-2 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
       >
         <ZoomOut className="w-4 h-4" />
       </button>
       <button
         onClick={() => { map.setView(MAP_CENTER, MAP_ZOOM); onMapInteraction?.(); }}
         aria-label="Recenter map on Cape Town"
-        className="p-2 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF85] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
+        className="p-2 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
       >
         <Locate className="w-4 h-4" />
       </button>
@@ -197,7 +197,7 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
     { id: 'traffic', name: 'Traffic Lights', icon: TrafficCone, color: '#22c55e', enabled: false, category: 'infrastructure' },
     { id: 'wildfire', name: 'Wildfire (AFIS)', icon: AlertTriangle, color: '#ef4444', enabled: false, category: 'operations' },
     { id: 'saps', name: 'SAPS Stations', icon: Shield, color: '#00B8FF', enabled: false, category: 'operations' },
-    { id: 'hospitals', name: 'Hospitals & Clinics', icon: Cross, color: '#00FF85', enabled: false, category: 'operations' },
+    { id: 'hospitals', name: 'Hospitals & Clinics', icon: Cross, color: '#7C3AED', enabled: false, category: 'operations' },
   ]);
 
   const showSaps = !!layers.find(l => l.id === 'saps')?.enabled;
