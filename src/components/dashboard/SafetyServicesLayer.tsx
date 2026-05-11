@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { useSapsStations, useHealthFacilities } from '@/hooks/useSafetyMapServices';
 
 const ICON_BLUE = '#00B8FF';   // SAPS — info cyan
-const ICON_GREEN = '#00FF85';  // Hospital — signal green
+const ICON_GREEN = '#7C3AED';  // Hospital — signal green
 
 const buildIcon = (color: string, label: string) => {
   return L.divIcon({
@@ -53,7 +53,7 @@ const SafetyServicesLayer = memo(({ showSaps, showHealth }: Props) => {
                     📞 {s.phone}
                   </a>
                 )}
-                {s.is_24h && <div className="mt-1 text-[#00FF85]">24H_OPEN</div>}
+                {s.is_24h && <div className="mt-1 text-[#7C3AED]">24H_OPEN</div>}
               </div>
             </Popup>
           </Marker>
@@ -64,17 +64,17 @@ const SafetyServicesLayer = memo(({ showSaps, showHealth }: Props) => {
           <Marker key={f.id} position={[f.latitude, f.longitude]} icon={hospitalIcon}>
             <Popup>
               <div className="font-mono text-[11px] leading-relaxed min-w-[180px]">
-                <div className="text-[10px] tracking-[0.15em] text-[#00FF85] mb-1">
+                <div className="text-[10px] tracking-[0.15em] text-[#7C3AED] mb-1">
                   ▸ {f.facility_type.replace(/_/g, ' ').toUpperCase()}
                 </div>
                 <div className="font-bold text-foreground">{f.name}</div>
                 {f.address && <div className="text-foreground/60">{f.address}</div>}
                 {f.has_trauma_unit && <div className="mt-1 text-[#FF3B3B]">TRAUMA_UNIT</div>}
-                {f.is_24h && <div className="text-[#00FF85]">24H_OPEN</div>}
+                {f.is_24h && <div className="text-[#7C3AED]">24H_OPEN</div>}
                 {(f.emergency_phone || f.phone) && (
                   <a
                     href={`tel:${(f.emergency_phone || f.phone)!.replace(/\s/g, '')}`}
-                    className="block mt-2 text-[#00FF85] underline"
+                    className="block mt-2 text-[#7C3AED] underline"
                   >
                     📞 {f.emergency_phone || f.phone}
                   </a>

@@ -33,14 +33,14 @@ const SERVICE_COLORS: Record<ServiceType, string> = {
   fire: '#FF9500',
   ambulance: '#FF6B30',
   trauma: '#FF3B30',
-  shelter: '#00FF85',
+  shelter: '#7C3AED',
 };
 
 const userPin = L.divIcon({
   className: 'tactical-pin-user',
   html: `<div style="position:relative;width:24px;height:24px;">
-    <div style="position:absolute;inset:0;border-radius:50%;background:#00FF8533;animation:tactical-pulse 1.6s infinite;"></div>
-    <div style="position:absolute;left:6px;top:6px;width:12px;height:12px;border-radius:50%;background:#00FF85;box-shadow:0 0 0 1.5px #000;"></div>
+    <div style="position:absolute;inset:0;border-radius:50%;background:#7C3AED33;animation:tactical-pulse 1.6s infinite;"></div>
+    <div style="position:absolute;left:6px;top:6px;width:12px;height:12px;border-radius:50%;background:#7C3AED;box-shadow:0 0 0 1.5px #000;"></div>
   </div>`,
   iconSize: [24, 24],
   iconAnchor: [12, 12],
@@ -59,7 +59,7 @@ const serviceIcon = (type: ServiceType) =>
   });
 
 const wardColor = (score: number) =>
-  score >= 70 ? '#00FF85' : score >= 50 ? '#FF9500' : '#FF3B30';
+  score >= 70 ? '#7C3AED' : score >= 50 ? '#FF9500' : '#FF3B30';
 
 const MapWiring = memo(({ onMove }: { onMove: (lat: number, lng: number) => void }) => {
   const map = useMap();
@@ -249,7 +249,7 @@ const TacticalMapView = memo(({ onNavigate }: Props) => {
                 onClick={() => setFilter(f.id)}
                 className="shrink-0 px-3 py-1.5 text-xs whitespace-nowrap transition-colors tap"
                 style={{
-                  background: active ? '#00FF85' : 'transparent',
+                  background: active ? '#7C3AED' : 'transparent',
                   color: active ? '#000' : '#A0A0A0',
                   fontFamily: 'DM Sans, sans-serif',
                   fontWeight: active ? 600 : 500,
@@ -473,7 +473,7 @@ const TacticalMapView = memo(({ onNavigate }: Props) => {
                     onClick={() => goToRoutesWithWard(selectedWard)}
                     className="w-full flex items-center justify-center gap-2 px-4 tap"
                     style={{
-                      background: '#00FF85',
+                      background: '#7C3AED',
                       color: '#000',
                       fontFamily: 'JetBrains Mono, monospace',
                       fontSize: 12,

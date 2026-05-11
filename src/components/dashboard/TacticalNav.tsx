@@ -105,19 +105,19 @@ const TacticalNav = memo(({ active, onNavigate, onSos }: Props) => {
               >
                 {isActive && (
                   <span
-                    className="absolute top-0 w-4 h-[2px] bg-[#00FF85]"
+                    className="absolute top-0 w-4 h-[2px] bg-[#7C3AED]"
                     aria-hidden
                   />
                 )}
                 <Icon
                   size={22}
                   strokeWidth={2}
-                  color={isActive ? '#00FF85' : '#333'}
+                  color={isActive ? '#7C3AED' : '#333'}
                 />
                 <span
                   className="text-[9px]"
                   style={{
-                    color: isActive ? '#00FF85' : '#333',
+                    color: isActive ? '#7C3AED' : '#333',
                     fontWeight: isActive ? 600 : 500,
                     fontFamily: 'DM Sans, sans-serif',
                     letterSpacing: '0.05em',

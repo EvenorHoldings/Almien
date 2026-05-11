@@ -11,7 +11,7 @@ interface Props {
   onNavigate?: (view: ViewId) => void;
 }
 
-const RISK_COLOR = { safe: '#00FF85', warn: '#FF9500', threat: '#FF3B30' } as const;
+const RISK_COLOR = { safe: '#7C3AED', warn: '#FF9500', threat: '#FF3B30' } as const;
 const wardColor = (score: number) =>
   score >= 70 ? RISK_COLOR.safe : score >= 50 ? RISK_COLOR.warn : RISK_COLOR.threat;
 
@@ -96,8 +96,8 @@ const CorridorIntelView = memo(({ onNavigate }: Props) => {
       {/* Header */}
       <div className="border-b border-[#1A1A1A] pb-3 mb-4">
         <div className="flex items-center gap-2 mb-1">
-          <span className="w-1.5 h-1.5 bg-[#00FF85] animate-pulse" />
-          <span className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]">
+          <span className="w-1.5 h-1.5 bg-[#7C3AED] animate-pulse" />
+          <span className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]">
             CORRIDOR_SCAN · v3.0
           </span>
         </div>
@@ -105,7 +105,7 @@ const CorridorIntelView = memo(({ onNavigate }: Props) => {
           className="text-white"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 24, fontWeight: 700 }}
         >
-          PLAN<span className="text-[#00FF85]">.</span>SAFE_ROUTE
+          PLAN<span className="text-[#7C3AED]">.</span>SAFE_ROUTE
         </h1>
         <p className="font-mono text-[11px] text-[#777] mt-1">
           Ward-aware risk · {wards?.length ?? 0} wards loaded
@@ -115,9 +115,9 @@ const CorridorIntelView = memo(({ onNavigate }: Props) => {
       {/* FROM */}
       <button
         onClick={() => setPickerSide('from')}
-        className="w-full text-left bg-[#0A0A0A] border border-[#2A2A2A] border-l-2 border-l-[#00FF85] p-4 mb-2 tap"
+        className="w-full text-left bg-[#0A0A0A] border border-[#2A2A2A] border-l-2 border-l-[#7C3AED] p-4 mb-2 tap"
       >
-        <div className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85] mb-1.5">
+        <div className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED] mb-1.5">
           ORIGIN // FROM
         </div>
         <div className="flex items-center justify-between gap-2">
@@ -178,7 +178,7 @@ const CorridorIntelView = memo(({ onNavigate }: Props) => {
         disabled={!canScan}
         className="w-full tap"
         style={{
-          background: canScan ? '#00FF85' : '#1A1A1A',
+          background: canScan ? '#7C3AED' : '#1A1A1A',
           color: canScan ? '#000' : '#444',
           fontFamily: 'JetBrains Mono, monospace',
           fontSize: 12,
@@ -319,7 +319,7 @@ const CorridorIntelView = memo(({ onNavigate }: Props) => {
                 onClick={() => onNavigate?.('map-full')}
                 className="flex-1 tap"
                 style={{
-                  background: '#00FF85',
+                  background: '#7C3AED',
                   color: '#000',
                   fontFamily: 'JetBrains Mono, monospace',
                   fontSize: 11,
@@ -346,7 +346,7 @@ const CorridorIntelView = memo(({ onNavigate }: Props) => {
             </div>
             <div className="px-5 py-3 border-b border-[#1A1A1A] flex items-center justify-between shrink-0">
               <div
-                className="font-mono text-[10px] tracking-[0.2em] text-[#00FF85]"
+                className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED]"
               >
                 {pickerSide === 'from' ? 'SELECT ORIGIN WARD' : 'SELECT DESTINATION WARD'}
               </div>

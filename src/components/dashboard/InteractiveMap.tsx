@@ -108,21 +108,21 @@ const MapControls = () => {
       <button
         onClick={() => map.zoomIn()}
         aria-label="Zoom in"
-        className="p-2.5 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF85] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
+        className="p-2.5 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
       >
         <ZoomIn className="w-4 h-4" />
       </button>
       <button
         onClick={() => map.zoomOut()}
         aria-label="Zoom out"
-        className="p-2.5 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF85] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
+        className="p-2.5 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
       >
         <ZoomOut className="w-4 h-4" />
       </button>
       <button
         onClick={() => map.setView(MAP_CENTER, MAP_ZOOM)}
         aria-label="Recenter map on Cape Town"
-        className="p-2.5 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF85] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
+        className="p-2.5 bg-card/90 backdrop-blur-sm rounded-lg border border-border shadow-lg hover:bg-card transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-1 focus-visible:ring-offset-black"
       >
         <Locate className="w-4 h-4" />
       </button>

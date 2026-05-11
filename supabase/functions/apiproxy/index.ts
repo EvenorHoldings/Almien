@@ -149,8 +149,42 @@ Deno.serve(async (req) => {
       );
     }
 
+    // ---------- i-TRAFFIC: Incidents + Cameras (mock) ----------
+    if (service === "traffic-incidents") {
+      const itrKey = Deno.env.get("ITRAFFIC_API_KEY");
+      const now = Date.now();
+      // Realistic Cape Town hotspots
+      const seedIncidents = [
+        { id: "i1", lat: -33.9248, lng: 18.4321, type: "accident",     road: "N1 Outbound",        direction: "Northbound",  ageMin: 4,  severity: "high"   },
+        { id: "i2", lat: -33.9186, lng: 18.4233, type: "congestion",   road: "Buitengracht St",   direction: "Southbound",  ageMin: 12, severity: "medium" },
+        { id: "i3", lat: -33.9352, lng: 18.4724, type: "hijack_alert", road: "M3 near Rondebosch", direction: "Northbound",  ageMin: 8,  severity: "critical" },
+        { id: "i4", lat: -33.9580, lng: 18.4640, type: "disabled",     road: "Main Rd, Wynberg",  direction: "Southbound",  ageMin: 22, severity: "low"    },
+        { id: "i5", lat: -33.9023, lng: 18.4197, type: "accident",     road: "Helen Suzman Blvd", direction: "Eastbound",   ageMin: 17, severity: "medium" },
+        { id: "i6", lat: -33.9710, lng: 18.6020, type: "congestion",   road: "R300 / N2 split",   direction: "Eastbound",   ageMin: 6,  severity: "high"   },
+      ];
+      const seedCameras = [
+        { id: "c1", lat: -33.9249, lng: 18.4241, name: "CBD / Adderley",      url: "https://www.i-traffic.co.za/camera/cbd-adderley" },
+        { id: "c2", lat: -33.9352, lng: 18.4724, name: "M3 Newlands",         url: "https://www.i-traffic.co.za/camera/m3-newlands" },
+        { id: "c3", lat: -33.9023, lng: 18.4197, name: "Sea Point Promenade", url: "https://www.i-traffic.co.za/camera/sea-point" },
+        { id: "c4", lat: -33.9710, lng: 18.6020, name: "N2 / R300",           url: "https://www.i-traffic.co.za/camera/n2-r300" },
+        { id: "c5", lat: -33.9580, lng: 18.4640, name: "Wynberg Main",        url: "https://www.i-traffic.co.za/camera/wynberg" },
+      ];
+
+      return new Response(
+        JSON.stringify({
+          status: itrKey ? "live-shaped-mock" : "demo",
+          fetched_at: new Date(now).toISOString(),
+          ttl_seconds: 300,
+          incidents: seedIncidents,
+          cameras: seedCameras,
+          note: itrKey ? "i-TRAFFIC key present; live integration scaffold pending." : "Mock data — i-TRAFFIC key not set.",
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     return new Response(
-      JSON.stringify({ error: "Unknown service. Use: esp-status, esp-area, weather" }),
+      JSON.stringify({ error: "Unknown service. Use: esp-status, esp-area, weather, traffic-incidents" }),
       { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {

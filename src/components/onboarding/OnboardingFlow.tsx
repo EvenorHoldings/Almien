@@ -71,17 +71,17 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
     // ── 1. INIT ──
     <Screen key="welcome">
       <div className="text-center">
-        <div className="inline-block border border-[#00FF85] p-4 mb-6">
-          <Shield className="w-10 h-10" style={{ color: '#00FF85' }} />
+        <div className="inline-block border border-[#7C3AED] p-4 mb-6">
+          <Shield className="w-10 h-10" style={{ color: '#7C3AED' }} />
         </div>
-        <Tag color="#00FF85">[ TERMINAL BOOT ]</Tag>
+        <Tag color="#7C3AED">[ TERMINAL BOOT ]</Tag>
         <h1
           className="text-4xl font-bold tracking-tighter mt-2"
           style={{ fontFamily: 'Space Grotesk, sans-serif', color: '#fff' }}
         >
           ALMIEN v2.0
         </h1>
-        <div className="mt-1 h-[2px] w-16 bg-[#00FF85] mx-auto" />
+        <div className="mt-1 h-[2px] w-16 bg-[#7C3AED] mx-auto" />
         <p className="text-sm text-[#999] mt-5 mono leading-relaxed max-w-xs mx-auto">
           Urban intelligence terminal.<br />Built for South Africa.
         </p>
@@ -109,7 +109,7 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
     <Screen key="suburb">
       <div className="text-center">
         <IconBlock icon={MapPin} />
-        <Tag color="#00FF85">[ BASE SECTOR ]</Tag>
+        <Tag color="#7C3AED">[ BASE SECTOR ]</Tag>
         <h2 className="screen-h">Where do you operate from?</h2>
         <p className="screen-p">Your daily intelligence briefing is built around this area.</p>
       </div>
@@ -206,9 +206,9 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
                 className="py-2 text-xs font-bold tracking-wider border transition-colors"
                 style={{
                   fontFamily: 'JetBrains Mono, monospace',
-                  background: commuteTime === t ? '#00FF85' : 'transparent',
+                  background: commuteTime === t ? '#7C3AED' : 'transparent',
                   color: commuteTime === t ? '#000' : '#999',
-                  borderColor: commuteTime === t ? '#00FF85' : '#1A1A1A',
+                  borderColor: commuteTime === t ? '#7C3AED' : '#1A1A1A',
                 }}
               >
                 {t}
@@ -244,13 +244,13 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
               style={{
                 fontFamily: 'JetBrains Mono, monospace',
                 background: active ? 'rgba(0,255,133,0.08)' : 'transparent',
-                color: active ? '#00FF85' : '#666',
-                borderColor: active ? '#00FF85' : '#1A1A1A',
+                color: active ? '#7C3AED' : '#666',
+                borderColor: active ? '#7C3AED' : '#1A1A1A',
               }}
             >
               <span
                 className="w-3 h-3 border flex items-center justify-center shrink-0"
-                style={{ borderColor: active ? '#00FF85' : '#333' }}
+                style={{ borderColor: active ? '#7C3AED' : '#333' }}
               >
                 {active && <Check className="w-2.5 h-2.5" />}
               </span>
@@ -268,10 +268,10 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
     // ── 7. AI_HANDSHAKE ──
     <Screen key="safi">
       <div className="text-center">
-        <div className="inline-block border border-[#00FF85] p-4 mb-6">
-          <Sparkles className="w-10 h-10" style={{ color: '#00FF85' }} />
+        <div className="inline-block border border-[#7C3AED] p-4 mb-6">
+          <Sparkles className="w-10 h-10" style={{ color: '#7C3AED' }} />
         </div>
-        <Tag color="#00FF85">[ AI HANDSHAKE ]</Tag>
+        <Tag color="#7C3AED">[ AI HANDSHAKE ]</Tag>
         <h2 className="screen-h">SAFI online.</h2>
         <p className="screen-p">
           AI safety concierge. Knows your sector, commute, and risk profile. Always on.
@@ -290,7 +290,7 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
             <span className="label-micro" style={{ color: '#666' }}>{m.l}</span>
             <span
               className="text-xs font-bold tracking-wider"
-              style={{ fontFamily: 'JetBrains Mono, monospace', color: '#00FF85' }}
+              style={{ fontFamily: 'JetBrains Mono, monospace', color: '#7C3AED' }}
             >
               ● {m.v}
             </span>
@@ -308,7 +308,7 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
         className="fixed inset-0 pointer-events-none opacity-[0.03]"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, #00FF85 0, #00FF85 1px, transparent 1px, transparent 4px)',
+            'repeating-linear-gradient(0deg, #7C3AED 0, #7C3AED 1px, transparent 1px, transparent 4px)',
         }}
       />
 
@@ -317,17 +317,17 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
         <button
           onClick={back}
           disabled={step === 0}
-          className="flex items-center gap-1 label-micro disabled:opacity-30 hover:text-[#00FF85] transition-colors"
+          className="flex items-center gap-1 label-micro disabled:opacity-30 hover:text-[#7C3AED] transition-colors"
           style={{ color: '#666' }}
         >
           <ChevronLeft className="w-3 h-3" /> BACK
         </button>
-        <div className="label-micro mono" style={{ color: '#00FF85' }}>
+        <div className="label-micro mono" style={{ color: '#7C3AED' }}>
           {String(step + 1).padStart(2, '0')}/{String(totalSteps).padStart(2, '0')} · {STEP_TITLES[step]}
         </div>
         <button
           onClick={onComplete}
-          className="label-micro hover:text-[#00FF85] transition-colors"
+          className="label-micro hover:text-[#7C3AED] transition-colors"
           style={{ color: '#666' }}
         >
           ABORT
@@ -341,7 +341,7 @@ const OnboardingFlow = memo(({ onComplete }: OnboardingFlowProps) => {
             key={i}
             className="flex-1 h-0.5 transition-colors"
             style={{
-              background: i <= step ? '#00FF85' : '#1A1A1A',
+              background: i <= step ? '#7C3AED' : '#1A1A1A',
             }}
           />
         ))}
@@ -373,7 +373,7 @@ const Tag = ({ children, color }: { children: React.ReactNode; color: string }) 
 
 const IconBlock = ({
   icon: Icon,
-  color = '#00FF85',
+  color = '#7C3AED',
 }: {
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   color?: string;

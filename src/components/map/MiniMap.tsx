@@ -59,8 +59,8 @@ const MiniMap = ({ bottom = 16, right = 16 }: MiniMapProps) => {
       style={{ bottom, right, width: 180, height: 140 }}
       aria-label="Overview map"
     >
-      <div className="w-full h-full border border-[#1A1A1A] hover:border-[#00FF85]/40 transition-colors bg-black overflow-hidden relative">
-        <div className="absolute top-1 left-1.5 z-[10] font-mono text-[8px] tracking-[0.2em] text-[#00FF85]/80 pointer-events-none">
+      <div className="w-full h-full border border-[#1A1A1A] hover:border-[#7C3AED]/40 transition-colors bg-black overflow-hidden relative">
+        <div className="absolute top-1 left-1.5 z-[10] font-mono text-[8px] tracking-[0.2em] text-[#7C3AED]/80 pointer-events-none">
           OVERVIEW
         </div>
         <MapContainer
@@ -105,7 +105,7 @@ const ViewportRect = () => {
         rectRef.current.setBounds(bounds);
       } else {
         rectRef.current = L.rectangle(bounds, {
-          color: '#00FF85',
+          color: '#7C3AED',
           weight: 1,
           fillOpacity: 0.08,
           interactive: false,

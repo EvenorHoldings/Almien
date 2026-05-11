@@ -14,7 +14,7 @@ export const createTacticalClusterIcon = (cluster: { getChildCount: () => number
         width:${size}px;
         height:${size}px;
         background:#000;
-        border:1px solid #00FF85;
+        border:1px solid #7C3AED;
         box-shadow:0 0 0 2px rgba(0,255,133,0.15);
         display:flex;
         align-items:center;
@@ -22,7 +22,7 @@ export const createTacticalClusterIcon = (cluster: { getChildCount: () => number
         font-family:'JetBrains Mono', ui-monospace, monospace;
         font-weight:700;
         font-size:${size > 40 ? 13 : 11}px;
-        color:#00FF85;
+        color:#7C3AED;
         letter-spacing:0.05em;
       ">${count}</div>
     `,

@@ -374,23 +374,23 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
         className="absolute inset-0 pointer-events-none opacity-[0.025] z-0"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, #00FF85 0, #00FF85 1px, transparent 1px, transparent 4px)',
+            'repeating-linear-gradient(0deg, #7C3AED 0, #7C3AED 1px, transparent 1px, transparent 4px)',
         }}
       />
 
       {/* TOP STATUS STRIP */}
       <header className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-[#1A1A1A] shrink-0">
         <div className="flex items-center gap-2 min-w-0">
-          <Sparkles className="w-3.5 h-3.5 shrink-0" style={{ color: '#00FF85' }} />
+          <Sparkles className="w-3.5 h-3.5 shrink-0" style={{ color: '#7C3AED' }} />
           <div
             className="text-xs font-bold tracking-[0.15em]"
-            style={{ fontFamily: 'JetBrains Mono, monospace', color: '#00FF85' }}
+            style={{ fontFamily: 'JetBrains Mono, monospace', color: '#7C3AED' }}
           >
             SAFI
           </div>
           <span
             className="label-micro px-1.5 py-0.5 border"
-            style={{ color: streaming ? '#FF9500' : '#00FF85', borderColor: streaming ? '#FF9500' : '#1A1A1A' }}
+            style={{ color: streaming ? '#FF9500' : '#7C3AED', borderColor: streaming ? '#FF9500' : '#1A1A1A' }}
           >
             {streaming ? '◉ STREAMING' : '● ONLINE'}
           </span>
@@ -425,7 +425,7 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
           )}
           <button
             onClick={onClose}
-            className="w-9 h-9 flex items-center justify-center border border-[#1A1A1A] hover:border-[#00FF85] hover:text-[#00FF85] text-[#666] transition-colors"
+            className="w-9 h-9 flex items-center justify-center border border-[#1A1A1A] hover:border-[#7C3AED] hover:text-[#7C3AED] text-[#666] transition-colors"
             aria-label="Close Safi"
           >
             <X className="w-4 h-4" />
@@ -442,7 +442,7 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
             className="flex-1 py-2.5 text-[10px] font-bold tracking-[0.15em] uppercase transition-colors"
             style={{
               fontFamily: 'JetBrains Mono, monospace',
-              background: mode === m ? '#00FF85' : 'transparent',
+              background: mode === m ? '#7C3AED' : 'transparent',
               color: mode === m ? '#000' : '#666',
               borderRight: '1px solid #1A1A1A',
             }}
@@ -468,8 +468,8 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
                 <MessageRow key={msg.id} message={msg} />
               ))}
               {streaming && messages[messages.length - 1]?.role !== 'assistant' && (
-                <div className="flex items-center gap-2 label-micro" style={{ color: '#00FF85' }}>
-                  <span className="inline-block w-1.5 h-1.5 bg-[#00FF85] animate-pulse" />
+                <div className="flex items-center gap-2 label-micro" style={{ color: '#7C3AED' }}>
+                  <span className="inline-block w-1.5 h-1.5 bg-[#7C3AED] animate-pulse" />
                   PROCESSING…
                 </div>
               )}
@@ -484,7 +484,7 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
                 <button
                   key={chip}
                   onClick={() => sendMessage(chip)}
-                  className="shrink-0 px-3 py-2 border border-[#1A1A1A] text-[11px] text-[#999] hover:text-[#00FF85] hover:border-[#00FF85] transition-colors"
+                  className="shrink-0 px-3 py-2 border border-[#1A1A1A] text-[11px] text-[#999] hover:text-[#7C3AED] hover:border-[#7C3AED] transition-colors"
                   style={{ fontFamily: 'JetBrains Mono, monospace' }}
                 >
                   {chip}
@@ -495,19 +495,19 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
 
           {/* LISTENING BAR */}
           {isListening && (
-            <div className="relative z-10 px-4 py-3 border-t border-[#1A1A1A] bg-[#00FF85]/5 flex flex-col items-center gap-1.5 shrink-0 animate-fade-in">
+            <div className="relative z-10 px-4 py-3 border-t border-[#1A1A1A] bg-[#7C3AED]/5 flex flex-col items-center gap-1.5 shrink-0 animate-fade-in">
               <div className="flex items-end gap-1 h-5">
                 {[0, 1, 2, 3].map((i) => (
                   <span
                     key={i}
-                    className="w-1 bg-[#00FF85] animate-pulse"
+                    className="w-1 bg-[#7C3AED] animate-pulse"
                     style={{ height: `${40 + i * 15}%`, animationDelay: `${i * 100}ms` }}
                   />
                 ))}
               </div>
               <span
                 className="text-[10px] font-bold tracking-wider"
-                style={{ fontFamily: 'JetBrains Mono, monospace', color: '#00FF85' }}
+                style={{ fontFamily: 'JetBrains Mono, monospace', color: '#7C3AED' }}
               >
                 LISTENING · SPEAK NOW
               </span>
@@ -519,10 +519,10 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
             className="relative z-10 flex items-center gap-2 p-3 border-t border-[#1A1A1A] shrink-0"
             style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}
           >
-            <div className="flex-1 flex items-center gap-2 border border-[#1A1A1A] focus-within:border-[#00FF85] bg-[#0A0A0A] px-3 transition-colors">
+            <div className="flex-1 flex items-center gap-2 border border-[#1A1A1A] focus-within:border-[#7C3AED] bg-[#0A0A0A] px-3 transition-colors">
               <span
                 className="label-micro shrink-0"
-                style={{ color: '#00FF85' }}
+                style={{ color: '#7C3AED' }}
               >
                 {'>'}
               </span>
@@ -540,8 +540,8 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
                 <button
                   onClick={isListening ? stopVoiceInput : startVoiceInput}
                   disabled={streaming}
-                  className="shrink-0 w-8 h-8 flex items-center justify-center border border-[#1A1A1A] hover:border-[#00FF85] transition-colors disabled:opacity-30"
-                  style={{ color: isListening ? '#00FF85' : '#666' }}
+                  className="shrink-0 w-8 h-8 flex items-center justify-center border border-[#1A1A1A] hover:border-[#7C3AED] transition-colors disabled:opacity-30"
+                  style={{ color: isListening ? '#7C3AED' : '#666' }}
                   aria-label={isListening ? 'Stop voice input' : 'Start voice input'}
                 >
                   {isListening ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
@@ -560,7 +560,7 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
               <button
                 onClick={() => sendMessage(inputValue)}
                 disabled={!inputValue.trim()}
-                className="w-12 h-12 flex items-center justify-center bg-[#00FF85] hover:brightness-110 active:scale-95 transition-all disabled:bg-[#1A1A1A] disabled:cursor-not-allowed"
+                className="w-12 h-12 flex items-center justify-center bg-[#7C3AED] hover:brightness-110 active:scale-95 transition-all disabled:bg-[#1A1A1A] disabled:cursor-not-allowed"
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4 text-black" />
@@ -598,8 +598,8 @@ function IconBtn({
       aria-label={label}
       className="w-9 h-9 flex items-center justify-center border transition-colors"
       style={{
-        borderColor: active ? '#00FF85' : '#1A1A1A',
-        color: active ? '#00FF85' : '#666',
+        borderColor: active ? '#7C3AED' : '#1A1A1A',
+        color: active ? '#7C3AED' : '#666',
         background: active ? 'rgba(0,255,133,0.08)' : 'transparent',
       }}
     >
@@ -614,7 +614,7 @@ function MessageRow({ message }: { message: Message }) {
     <div className={cn('flex flex-col gap-1', isUser ? 'items-end' : 'items-start')}>
       <div
         className="flex items-center gap-2 label-micro"
-        style={{ color: isUser ? '#666' : '#00FF85' }}
+        style={{ color: isUser ? '#666' : '#7C3AED' }}
       >
         <span>{isUser ? '› YOU' : '◆ SAFI'}</span>
         <span style={{ color: '#444' }}>{fmtTime(message.timestamp)}</span>
@@ -623,8 +623,8 @@ function MessageRow({ message }: { message: Message }) {
         className={cn('max-w-[88%] px-3 py-2.5 border')}
         style={{
           background: isUser ? 'rgba(0,255,133,0.05)' : '#0A0A0A',
-          borderColor: isUser ? '#00FF85' : '#1A1A1A',
-          borderLeft: isUser ? '2px solid #00FF85' : '2px solid #00FF85',
+          borderColor: isUser ? '#7C3AED' : '#1A1A1A',
+          borderLeft: isUser ? '2px solid #7C3AED' : '2px solid #7C3AED',
         }}
       >
         {isUser ? (
@@ -640,13 +640,13 @@ function MessageRow({ message }: { message: Message }) {
               components={{
                 p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
                 strong: ({ children }) => (
-                  <strong style={{ color: '#00FF85', fontWeight: 700 }}>{children}</strong>
+                  <strong style={{ color: '#7C3AED', fontWeight: 700 }}>{children}</strong>
                 ),
                 ul: ({ children }) => <ul className="my-2 space-y-1">{children}</ul>,
                 ol: ({ children }) => <ol className="my-2 space-y-1 list-decimal pl-4">{children}</ol>,
                 li: ({ children }) => (
                   <li className="flex gap-2">
-                    <span style={{ color: '#00FF85' }}>›</span>
+                    <span style={{ color: '#7C3AED' }}>›</span>
                     <span className="flex-1">{children}</span>
                   </li>
                 ),
@@ -656,7 +656,7 @@ function MessageRow({ message }: { message: Message }) {
                     style={{
                       fontFamily: 'JetBrains Mono, monospace',
                       background: '#000',
-                      color: '#00FF85',
+                      color: '#7C3AED',
                       border: '1px solid #1A1A1A',
                     }}
                   >
@@ -689,7 +689,7 @@ function EmergencyMode() {
   const items = [
     { label: 'CALL SAPS', sub: '10111', tel: '10111', color: '#00B4D8', icon: Shield },
     { label: 'EMS AMBULANCE', sub: '10177', tel: '10177', color: '#FF3B30', icon: AlertTriangle },
-    { label: 'SHARE LOCATION', sub: 'BROADCAST GUARDIANS', color: '#00FF85', icon: MapPin },
+    { label: 'SHARE LOCATION', sub: 'BROADCAST GUARDIANS', color: '#7C3AED', icon: MapPin },
     { label: 'ALERT NETWORK', sub: 'NOTIFY ALL CONTACTS', color: '#FFD60A', icon: Users },
   ];
   return (
@@ -748,7 +748,7 @@ function BriefingMode() {
     },
     {
       level: 'SAFE',
-      color: '#00FF85',
+      color: '#7C3AED',
       label: 'SAFE WINDOWS',
       text: 'Morning walk safe until 08:15. Evening return before 17:30.',
     },
@@ -802,7 +802,7 @@ function BriefingMode() {
 
 function RouteMode({ onNavigate }: { onNavigate?: (view: ViewId) => void }) {
   const routes = [
-    { name: 'M3 VIA UCT', score: 7.8, color: '#00FF85', meta: 'ETA 18 MIN · LIT · CCTV' },
+    { name: 'M3 VIA UCT', score: 7.8, color: '#7C3AED', meta: 'ETA 18 MIN · LIT · CCTV' },
     { name: 'N2 HIGHWAY', score: 6.2, color: '#FF9500', meta: 'ETA 14 MIN · 1 ALERT' },
     { name: 'DE WAAL DRIVE', score: 4.1, color: '#FF3B30', meta: 'ETA 16 MIN · 2 INCIDENTS' },
   ];
@@ -822,13 +822,13 @@ function RouteMode({ onNavigate }: { onNavigate?: (view: ViewId) => void }) {
       <div className="grid grid-cols-2 gap-2">
         <div className="border border-[#1A1A1A] bg-[#0A0A0A] p-3">
           <div className="label-micro" style={{ color: '#666' }}>FROM</div>
-          <div className="text-sm font-bold mt-1" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#00FF85' }}>
+          <div className="text-sm font-bold mt-1" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#7C3AED' }}>
             {userContext.suburb.toUpperCase()}
           </div>
         </div>
         <div className="border border-[#1A1A1A] bg-[#0A0A0A] p-3">
           <div className="label-micro" style={{ color: '#666' }}>TO</div>
-          <div className="text-sm font-bold mt-1" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#00FF85' }}>
+          <div className="text-sm font-bold mt-1" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#7C3AED' }}>
             {userContext.commute.toUpperCase()}
           </div>
         </div>

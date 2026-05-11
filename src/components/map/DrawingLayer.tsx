@@ -11,7 +11,7 @@ import L from 'leaflet';
 import { useDrawingStore } from '@/stores/drawingStore';
 import { X } from 'lucide-react';
 
-const SIGNAL = '#00FF85';
+const SIGNAL = '#7C3AED';
 
 const pinIcon = L.divIcon({
   className: 'almien-draw-pin',
@@ -129,7 +129,7 @@ const DrawingLayer = () => {
 
 const OverlayPopup = ({ label, onRemove }: { label: string; onRemove: () => void }) => (
   <div className="flex items-center gap-2 font-mono text-[10px]">
-    <span className="text-[#00FF85]">{label}</span>
+    <span className="text-[#7C3AED]">{label}</span>
     <button
       onClick={onRemove}
       className="p-0.5 border border-[#1A1A1A] hover:border-red-500/50 hover:text-red-400"

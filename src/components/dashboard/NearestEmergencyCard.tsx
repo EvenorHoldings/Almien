@@ -59,7 +59,7 @@ const NearestEmergencyCard = memo(() => {
               {nearest.saps.dist.toFixed(1)} km
             </div>
             {nearest.saps.phone && (
-              <div className="mt-1 flex items-center gap-1 text-[10px] text-[#00FF85]">
+              <div className="mt-1 flex items-center gap-1 text-[10px] text-[#7C3AED]">
                 <Phone size={10} /> CALL
               </div>
             )}
@@ -76,8 +76,8 @@ const NearestEmergencyCard = memo(() => {
             style={{ background: '#0A0A0A', border: '0.5px solid #2A2A2A' }}
           >
             <div className="flex items-center gap-1.5">
-              <Cross size={12} color="#00FF85" />
-              <span className="font-mono text-[9px] tracking-[0.2em] text-[#00FF85]">
+              <Cross size={12} color="#7C3AED" />
+              <span className="font-mono text-[9px] tracking-[0.2em] text-[#7C3AED]">
                 {nearest.hospital.has_trauma_unit ? 'TRAUMA' : 'HOSPITAL'}
               </span>
             </div>
@@ -86,7 +86,7 @@ const NearestEmergencyCard = memo(() => {
               {nearest.hospital.dist.toFixed(1)} km
             </div>
             {(nearest.hospital.emergency_phone || nearest.hospital.phone) && (
-              <div className="mt-1 flex items-center gap-1 text-[10px] text-[#00FF85]">
+              <div className="mt-1 flex items-center gap-1 text-[10px] text-[#7C3AED]">
                 <Phone size={10} /> CALL
               </div>
             )}

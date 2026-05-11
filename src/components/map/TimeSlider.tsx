@@ -92,7 +92,7 @@ const TimeSlider = () => {
             setPlaying(!playing);
           }}
           aria-label={playing ? 'Pause time scrubber' : 'Play time scrubber'}
-          className="p-1.5 border border-[#1A1A1A] hover:border-[#00FF85]/50 transition-colors text-[#00FF85]"
+          className="p-1.5 border border-[#1A1A1A] hover:border-[#7C3AED]/50 transition-colors text-[#7C3AED]"
         >
           {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
         </button>
@@ -116,7 +116,7 @@ const TimeSlider = () => {
           className={cn(
             'flex items-center gap-1 px-2 py-1 font-mono text-[9px] tracking-[0.2em] border transition-colors',
             isLive
-              ? 'border-[#00FF85]/60 text-[#00FF85] bg-[#00FF85]/10'
+              ? 'border-[#7C3AED]/60 text-[#7C3AED] bg-[#7C3AED]/10'
               : 'border-[#1A1A1A] text-[#666] hover:text-[#aaa] hover:border-[#333]'
           )}
         >

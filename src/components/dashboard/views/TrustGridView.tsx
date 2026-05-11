@@ -40,7 +40,7 @@ const MOCK_FEED: FeedItem[] = [
 /* ─── Avatar helpers ─────────────────────── */
 function getAvatarColor(name: string): { bg: string; fg: string } {
   const c = (name[0] || 'A').toUpperCase();
-  if (c <= 'E') return { bg: '#003D1F', fg: '#00FF85' };
+  if (c <= 'E') return { bg: '#2E1065', fg: '#7C3AED' };
   if (c <= 'J') return { bg: '#00243A', fg: '#00B4D8' };
   if (c <= 'O') return { bg: '#1A0A00', fg: '#FF9500' };
   if (c <= 'T') return { bg: '#1A0000', fg: '#FF3B30' };
@@ -51,7 +51,7 @@ function initials(name: string) {
 }
 
 const STATUS_DOT: Record<Status, string> = {
-  online: '#00FF85',
+  online: '#7C3AED',
   away: '#FF9500',
   offline: '#333333',
 };
@@ -61,7 +61,7 @@ const STATUS_LABEL: Record<Status, string> = {
   offline: 'OFFLINE',
 };
 const STATUS_TEXT: Record<Status, string> = {
-  online: '#00FF85',
+  online: '#7C3AED',
   away: '#FF9500',
   offline: '#555555',
 };
@@ -93,7 +93,7 @@ const StatBlock = memo(({ value, label, highlight }: { value: number; label: str
       className="flex flex-col items-center justify-center px-3 py-4"
       style={{
         background: '#0A0A0A',
-        border: highlight ? '0.5px solid #00FF85' : '0.5px solid #1F1F1F',
+        border: highlight ? '0.5px solid #7C3AED' : '0.5px solid #1F1F1F',
       }}
     >
       <div className="text-white tabular-nums"
@@ -211,7 +211,7 @@ const TrustGridView = memo(({ }: Props) => {
         <div>
           <div className="label-micro">PANIC NETWORK</div>
           <div className="mt-0.5"
-            style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 12, color: '#00FF85', fontWeight: 500 }}>
+            style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 12, color: '#7C3AED', fontWeight: 500 }}>
             {stats.online} guardians online
           </div>
         </div>

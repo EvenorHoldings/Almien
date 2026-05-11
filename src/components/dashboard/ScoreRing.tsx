@@ -12,7 +12,7 @@ const RADIUS = 88;
 const CIRC = 2 * Math.PI * RADIUS;
 
 function tier(score: number) {
-  if (score >= 80) return { label: 'SECURE', color: '#00FF85' };
+  if (score >= 80) return { label: 'SECURE', color: '#7C3AED' };
   if (score >= 60) return { label: 'MODERATE', color: '#FF9500' };
   if (score >= 40) return { label: 'ELEVATED', color: '#FF9500' };
   return { label: 'HIGH RISK', color: '#FF3B30' };

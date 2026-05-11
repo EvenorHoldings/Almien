@@ -19,7 +19,7 @@ const LiveModeToggle = ({ className }: { className?: string }) => {
       className={cn(
         'inline-flex items-center gap-1.5 px-2 py-1 border font-mono text-[10px] tracking-[0.15em] uppercase transition-colors',
         enabled
-          ? 'bg-[#00FF85]/10 border-[#00FF85]/60 text-[#00FF85]'
+          ? 'bg-[#7C3AED]/10 border-[#7C3AED]/60 text-[#7C3AED]'
           : 'bg-black/80 border-[#1A1A1A] text-[#666] hover:text-[#999] hover:border-[#333]',
         className
       )}
