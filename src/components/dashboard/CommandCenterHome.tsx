@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { Bell, Filter, ChevronRight, Cpu, Navigation, Radio } from 'lucide-react';
 import ScoreRing from './ScoreRing';
 import NearestEmergencyCard from './NearestEmergencyCard';
+import LoadSheddingBadge from './LoadSheddingBadge';
 import { useProactiveSafetyAlerts } from '@/hooks/useProactiveSafetyAlerts';
 import type { ViewId } from './AlmienDashboard';
 
@@ -66,6 +67,11 @@ const CommandCenterHome = memo(({ onNavigate, onOpenSafi }: Props) => {
 
       {/* SCORE RING */}
       <ScoreRing score={score} location="Cape Town Central · Ward 57" />
+
+      {/* LOAD-SHEDDING BADGE — 1-second scan */}
+      <div className="px-5 mt-1 flex justify-center">
+        <LoadSheddingBadge />
+      </div>
 
       {/* THREAT TICKER */}
       <section className="mt-6">
