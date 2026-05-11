@@ -13,6 +13,8 @@ import { toast } from 'sonner';
 import type { ViewId } from '../AlmienDashboard';
 import SuburbSearchInput from '../SuburbSearchInput';
 import { useUserLocation } from '@/hooks/useUserLocation';
+import { useTrafficIncidents } from '@/hooks/useTrafficIncidents';
+import { useLoadshedding } from '@/hooks/useLoadshedding';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -143,6 +145,8 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
   const journeyInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const userLoc = useUserLocation();
+  const { data: trafficData } = useTrafficIncidents();
+  const { status: lsStatus } = useLoadshedding();
   useEffect(() => {
     if (userLoc.nearestSuburb && !origin) {
       setOrigin(userLoc.nearestSuburb.suburb_name);
@@ -466,7 +470,26 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
             </span>
           </div>
 
-          {/* Tactical map preview */}
+          {/* Commute Shield · hazard fusion strip */}
+          <div className="grid grid-cols-3 gap-px bg-[#1A1A1A]">
+            <div className="bg-[#0A0A0A] p-2.5">
+              <div className="font-mono text-[8px] tracking-[0.18em] text-[#555]">CRIME_DENSITY</div>
+              <div className="font-mono text-[12px] text-white mt-0.5">MIXED</div>
+            </div>
+            <div className="bg-[#0A0A0A] p-2.5">
+              <div className="font-mono text-[8px] tracking-[0.18em] text-[#555]">TRAFFIC_INCIDENTS</div>
+              <div className="font-mono text-[12px] mt-0.5" style={{ color: (trafficData?.incidents?.length ?? 0) > 3 ? SIG_AMBER : '#fff' }}>
+                {trafficData?.incidents?.length ?? 0} ACTIVE
+              </div>
+            </div>
+            <div className="bg-[#0A0A0A] p-2.5">
+              <div className="font-mono text-[8px] tracking-[0.18em] text-[#555]">LOAD_SHEDDING</div>
+              <div className="font-mono text-[12px] mt-0.5" style={{ color: lsStatus?.is_active ? SIG_AMBER : '#fff' }}>
+                STAGE {lsStatus?.stage ?? 0}
+              </div>
+            </div>
+          </div>
+
           <div className="relative bg-[#0A0A0A] border border-[#2A2A2A] overflow-hidden h-48">
             <div className="absolute inset-0 opacity-[0.06]" style={{
               backgroundImage: 'linear-gradient(to right, #7C3AED 1px, transparent 1px), linear-gradient(to bottom, #7C3AED 1px, transparent 1px)',
