@@ -27,6 +27,17 @@ type TimeOption = 'now' | 'custom';
 
 type RouteOption = SafeRouteAlt;
 
+const SIG_GREEN = '#7C3AED';
+const SIG_AMBER = '#FF9500';
+const SIG_RED   = '#FF3B30';
+const SIG_BLUE  = '#00B4D8';
+
+const travelModes: { id: TravelMode; label: string; code: string; icon: typeof Footprints }[] = [
+  { id: 'foot',    label: 'On Foot',     code: 'FOOT',  icon: Footprints },
+  { id: 'car',     label: 'Private Car', code: 'CAR',   icon: Car },
+  { id: 'taxi',    label: 'Taxi/Mini',   code: 'TAXI',  icon: Bus },
+  { id: 'cycling', label: 'Cycling',     code: 'CYCLE', icon: Bike },
+];
 
 function tacticalScoreColor(s: number) {
   if (s >= 8) return SIG_GREEN;
