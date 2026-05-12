@@ -547,7 +547,10 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
 
                 {/* Expandable threats */}
                 <button
-                  onClick={() => setExpandedRoute(expanded ? null : route.id)}
+                  onClick={() => {
+                    setExpandedRoute(expanded ? null : route.id);
+                    useActiveRoutesStore.getState().selectRoute(route.id);
+                  }}
                   className="w-full flex items-center justify-between px-3 py-2 hover:bg-[#111] transition-colors border-b border-[#1A1A1A]"
                 >
                   <span className="font-mono text-[10px] tracking-[0.15em] text-[#999]">
