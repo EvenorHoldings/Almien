@@ -8,6 +8,7 @@ import {
 import SafetyServicesLayer from './SafetyServicesLayer';
 import TrafficIncidentsLayer from './TrafficIncidentsLayer';
 import CameraDotsLayer from './CameraDotsLayer';
+import ActiveRoutesLayer from './ActiveRoutesLayer';
 import { cn } from '@/lib/utils';
 import { 
   MAP_CENTER, MAP_ZOOM, 
@@ -386,6 +387,9 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
           {/* Traffic incidents + low-opacity camera dots (i-TRAFFIC mock) */}
           <TrafficIncidentsLayer visible={showTrafficIncidents} />
           <CameraDotsLayer visible={showCameras} />
+
+          {/* Commute Shield computed routes */}
+          <ActiveRoutesLayer />
 
           {/* Ward Boundaries - Ward/Suburb level */}
           <WardBoundariesLayer

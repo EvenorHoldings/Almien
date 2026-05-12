@@ -14,6 +14,7 @@
 import { useState, useCallback } from 'react';
 import { useTrafficIncidents, type TrafficIncident } from './useTrafficIncidents';
 import { useLoadshedding } from './useLoadshedding';
+import { useActiveRoutesStore } from '@/stores/activeRoutesStore';
 
 export type RouteMode = 'foot' | 'car' | 'taxi' | 'cycling';
 
@@ -143,6 +144,9 @@ export function useSafeRoute() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const setMapRoutes = useActiveRoutesStore((s) => s.setRoutes);
+  const clearMapRoutes = useActiveRoutesStore((s) => s.clear);
+
   const compute = useCallback(async (
     origin: { lat: number; lng: number; label: string },
     destination: { lat: number; lng: number; label: string },
@@ -152,6 +156,7 @@ export function useSafeRoute() {
     setLoading(true);
     setError(null);
     setRoutes(null);
+    clearMapRoutes();
     try {
       const profile = OSRM_PROFILE[mode];
       const url =
@@ -167,7 +172,6 @@ export function useSafeRoute() {
       const lsStage = lsStatus?.stage ?? 0;
       const hour = departureHour ?? new Date().getHours();
 
-      // OSRM returns lng,lat — convert to lat,lng for our use
       const enriched = json.routes.slice(0, 3).map((rt, idx) => {
         const geom: [number, number][] = rt.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
         const { score, breakdown, nearby, intersections } = scoreRoute(geom, incidents, lsStage, hour);
@@ -175,7 +179,7 @@ export function useSafeRoute() {
         const durationMin = Math.max(1, Math.round(rt.duration / 60));
         return {
           id: `r${idx}`,
-          name: '', // assigned after sort
+          name: '',
           isSafest: false,
           distanceKm,
           durationMin,
@@ -189,7 +193,6 @@ export function useSafeRoute() {
         } as SafeRouteAlt;
       });
 
-      // Rank: highest safety first, mark fastest by duration
       const fastestId = enriched.reduce((a, b) => (a.durationMin <= b.durationMin ? a : b)).id;
       const ranked = [...enriched].sort((a, b) => b.safetyScore - a.safetyScore);
       ranked.forEach((rt, i) => {
@@ -199,12 +202,20 @@ export function useSafeRoute() {
       });
 
       setRoutes(ranked);
+      setMapRoutes(ranked);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Route computation failed');
     } finally {
       setLoading(false);
     }
-  }, [trafficData, lsStatus]);
+  }, [trafficData, lsStatus, setMapRoutes, clearMapRoutes]);
 
-  return { routes, loading, error, compute, reset: () => setRoutes(null) };
+  return {
+    routes,
+    loading,
+    error,
+    compute,
+    reset: () => { setRoutes(null); clearMapRoutes(); },
+  };
 }
+

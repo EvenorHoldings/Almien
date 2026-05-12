@@ -16,6 +16,7 @@ import { useUserLocation } from '@/hooks/useUserLocation';
 import { useTrafficIncidents } from '@/hooks/useTrafficIncidents';
 import { useLoadshedding } from '@/hooks/useLoadshedding';
 import { useSafeRoute, type SafeRouteAlt } from '@/hooks/useSafeRoute';
+import { useActiveRoutesStore } from '@/stores/activeRoutesStore';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -422,9 +423,12 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                 ROUTES // {routes.length}_FOUND
               </span>
             </div>
-            <span className="font-mono text-[10px] tracking-[0.15em] text-[#555]">
-              {origin.toUpperCase().slice(0, 14)} → {destination.toUpperCase().slice(0, 14)}
-            </span>
+            <button
+              onClick={() => onNavigate('map-full' as ViewId)}
+              className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED] hover:text-white border border-[#7C3AED]/40 hover:border-[#7C3AED] px-2 py-1 transition-colors"
+            >
+              VIEW_ON_MAP ▸
+            </button>
           </div>
 
           {/* Commute Shield · hazard fusion strip */}
@@ -543,7 +547,10 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
 
                 {/* Expandable threats */}
                 <button
-                  onClick={() => setExpandedRoute(expanded ? null : route.id)}
+                  onClick={() => {
+                    setExpandedRoute(expanded ? null : route.id);
+                    useActiveRoutesStore.getState().selectRoute(route.id);
+                  }}
                   className="w-full flex items-center justify-between px-3 py-2 hover:bg-[#111] transition-colors border-b border-[#1A1A1A]"
                 >
                   <span className="font-mono text-[10px] tracking-[0.15em] text-[#999]">
