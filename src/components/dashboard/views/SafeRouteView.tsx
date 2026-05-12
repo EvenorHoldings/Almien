@@ -25,77 +25,8 @@ interface Props {
 type TravelMode = 'foot' | 'car' | 'taxi' | 'cycling';
 type TimeOption = 'now' | 'custom';
 
-interface RouteOption {
-  id: string;
-  name: string;
-  travelTime: string;
-  distanceKm: number;
-  safetyScore: number;
-  highRiskIntersections: number;
-  activeIncidents: number;
-  threats: string[];
-  isSafest: boolean;
-}
+type RouteOption = SafeRouteAlt;
 
-const SIG_GREEN = '#7C3AED';
-const SIG_AMBER = '#FF9500';
-const SIG_RED   = '#FF3B30';
-const SIG_BLUE  = '#00B4D8';
-
-const travelModes: { id: TravelMode; label: string; code: string; icon: typeof Footprints }[] = [
-  { id: 'foot',    label: 'On Foot',     code: 'FOOT',  icon: Footprints },
-  { id: 'car',     label: 'Private Car', code: 'CAR',   icon: Car },
-  { id: 'taxi',    label: 'Taxi/Mini',   code: 'TAXI',  icon: Bus },
-  { id: 'cycling', label: 'Cycling',     code: 'CYCLE', icon: Bike },
-];
-
-function generateMockRoutes(_origin: string, _destination: string, mode: TravelMode): RouteOption[] {
-  const baseTimes: Record<TravelMode, number> = { foot: 45, car: 18, taxi: 25, cycling: 30 };
-  const base = baseTimes[mode];
-
-  return [
-    {
-      id: 'safest',
-      name: 'TACTICAL // SAFEST',
-      travelTime: `${base + 5} min`,
-      distanceKm: +(Math.random() * 4 + 3).toFixed(1),
-      safetyScore: +(Math.random() * 2 + 8).toFixed(1),
-      highRiskIntersections: Math.floor(Math.random() * 2),
-      activeIncidents: Math.floor(Math.random() * 2),
-      threats: ['Moderate foot traffic after 20:00 — well-lit corridors'],
-      isSafest: true,
-    },
-    {
-      id: 'fastest',
-      name: 'DIRECT // FASTEST',
-      travelTime: `${base} min`,
-      distanceKm: +(Math.random() * 3 + 2).toFixed(1),
-      safetyScore: +(Math.random() * 3 + 4).toFixed(1),
-      highRiskIntersections: Math.floor(Math.random() * 4 + 2),
-      activeIncidents: Math.floor(Math.random() * 5 + 1),
-      threats: [
-        'Passes through high-incident zone near Long St',
-        'Limited CCTV coverage on Buitenkant St',
-        `${Math.floor(Math.random() * 3 + 1)} robbery reports in last 4h`,
-      ],
-      isSafest: false,
-    },
-    {
-      id: 'alternate',
-      name: 'BYPASS // ALTERNATE',
-      travelTime: `${base + 12} min`,
-      distanceKm: +(Math.random() * 5 + 4).toFixed(1),
-      safetyScore: +(Math.random() * 2 + 6).toFixed(1),
-      highRiskIntersections: Math.floor(Math.random() * 3 + 1),
-      activeIncidents: Math.floor(Math.random() * 3),
-      threats: [
-        'Low street lighting on sections of Main Rd',
-        'Construction detour near Salt River',
-      ],
-      isSafest: false,
-    },
-  ];
-}
 
 function tacticalScoreColor(s: number) {
   if (s >= 8) return SIG_GREEN;
