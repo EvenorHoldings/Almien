@@ -14,6 +14,7 @@
 import { useState, useCallback } from 'react';
 import { useTrafficIncidents, type TrafficIncident } from './useTrafficIncidents';
 import { useLoadshedding } from './useLoadshedding';
+import { useActiveRoutesStore } from '@/stores/activeRoutesStore';
 
 export type RouteMode = 'foot' | 'car' | 'taxi' | 'cycling';
 
