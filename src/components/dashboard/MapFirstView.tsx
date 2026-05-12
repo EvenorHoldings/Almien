@@ -388,6 +388,9 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
           <TrafficIncidentsLayer visible={showTrafficIncidents} />
           <CameraDotsLayer visible={showCameras} />
 
+          {/* Commute Shield computed routes */}
+          <ActiveRoutesLayer />
+
           {/* Ward Boundaries - Ward/Suburb level */}
           <WardBoundariesLayer
             visible={showWardBoundaries}
