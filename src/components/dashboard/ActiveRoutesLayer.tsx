@@ -59,40 +59,27 @@ const ActiveRoutesLayer = () => {
         const isSelected = r.id === selectedId;
         const color = colorFor(r.name);
         return (
-          <g key={r.id}>
-            {isSelected && (
-              <Polyline
-                positions={r.geometry}
-                pathOptions={{
-                  color: COLOR_SELECT,
-                  weight: 8,
-                  opacity: 0.35,
-                  lineCap: 'square',
-                }}
-                interactive={false}
-              />
-            )}
-            <Polyline
-              positions={r.geometry}
-              pathOptions={{
-                color,
-                weight: isSelected ? 5 : 3,
-                opacity: isSelected ? 1 : 0.6,
-                dashArray: isSelected ? undefined : '6 5',
-                lineCap: 'square',
-              }}
-              eventHandlers={{ click: () => selectRoute(r.id) }}
-            >
-              <Tooltip direction="top" sticky offset={[0, -4]} opacity={1}>
-                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, lineHeight: 1.4 }}>
-                  <div style={{ color, letterSpacing: '0.15em' }}>{r.name}</div>
-                  <div style={{ color: '#999' }}>
-                    SCORE {r.safetyScore.toFixed(1)} · {r.distanceKm}KM · {r.travelTime.toUpperCase()}
-                  </div>
+          <Polyline
+            key={r.id}
+            positions={r.geometry}
+            pathOptions={{
+              color: isSelected ? color : color,
+              weight: isSelected ? 5 : 3,
+              opacity: isSelected ? 1 : 0.6,
+              dashArray: isSelected ? undefined : '6 5',
+              lineCap: 'square',
+            }}
+            eventHandlers={{ click: () => selectRoute(r.id) }}
+          >
+            <Tooltip direction="top" sticky offset={[0, -4]} opacity={1}>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, lineHeight: 1.4 }}>
+                <div style={{ color, letterSpacing: '0.15em' }}>{r.name}</div>
+                <div style={{ color: '#999' }}>
+                  SCORE {r.safetyScore.toFixed(1)} · {r.distanceKm}KM · {r.travelTime.toUpperCase()}
                 </div>
-              </Tooltip>
-            </Polyline>
-          </g>
+              </div>
+            </Tooltip>
+          </Polyline>
         );
       })}
 
