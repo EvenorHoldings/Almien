@@ -78,8 +78,8 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
   const [customDate, setCustomDate] = useState<Date | undefined>(undefined);
   const [customTime, setCustomTime] = useState('18:00');
 
-  const [routes, setRoutes] = useState<RouteOption[] | null>(null);
-  const [calculating, setCalculating] = useState(false);
+  const [originCoords, setOriginCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [destCoords, setDestCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [expandedRoute, setExpandedRoute] = useState<string | null>(null);
 
   const [journeyActive, setJourneyActive] = useState(false);
@@ -90,27 +90,41 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
   const userLoc = useUserLocation();
   const { data: trafficData } = useTrafficIncidents();
   const { status: lsStatus } = useLoadshedding();
+  const { routes, loading: calculating, error: routeError, compute } = useSafeRoute();
+
   useEffect(() => {
     if (userLoc.nearestSuburb && !origin) {
       setOrigin(userLoc.nearestSuburb.suburb_name);
     } else if (userLoc.nearestArea && !origin) {
       setOrigin(userLoc.nearestArea.name);
     }
-  }, [userLoc.nearestSuburb, userLoc.nearestArea, origin]);
+    if (userLoc.coords && !originCoords) {
+      setOriginCoords(userLoc.coords);
+    }
+  }, [userLoc.nearestSuburb, userLoc.nearestArea, userLoc.coords, origin, originCoords]);
 
-  const calculateRoutes = () => {
+  const calculateRoutes = async () => {
     if (!origin.trim() || !destination.trim()) {
       toast.error('INPUT_ERR · ORIGIN_AND_DESTINATION_REQUIRED');
       return;
     }
-    setCalculating(true);
-    setRoutes(null);
-    setTimeout(() => {
-      setRoutes(generateMockRoutes(origin, destination, mode));
-      setCalculating(false);
-      toast.success('ROUTE_ANALYSIS · COMPLETE');
-    }, 1400);
+    if (!originCoords || !destCoords) {
+      toast.error('INPUT_ERR · SELECT_FROM_SUGGESTIONS_FOR_COORDINATES');
+      return;
+    }
+    const departureHour = timeOption === 'custom' && customTime
+      ? parseInt(customTime.split(':')[0], 10)
+      : new Date().getHours();
+    await compute(
+      { ...originCoords, label: origin },
+      { ...destCoords, label: destination },
+      mode,
+      departureHour,
+    );
+    if (routeError) toast.error(`ROUTE_ERR · ${routeError.toUpperCase()}`);
+    else toast.success('ROUTE_ANALYSIS · COMPLETE');
   };
+
 
   const startJourney = useCallback((_routeId: string) => {
     setJourneyActive(true);
