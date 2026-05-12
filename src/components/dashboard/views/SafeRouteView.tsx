@@ -15,6 +15,7 @@ import SuburbSearchInput from '../SuburbSearchInput';
 import { useUserLocation } from '@/hooks/useUserLocation';
 import { useTrafficIncidents } from '@/hooks/useTrafficIncidents';
 import { useLoadshedding } from '@/hooks/useLoadshedding';
+import { useSafeRoute, type SafeRouteAlt } from '@/hooks/useSafeRoute';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -24,17 +25,7 @@ interface Props {
 type TravelMode = 'foot' | 'car' | 'taxi' | 'cycling';
 type TimeOption = 'now' | 'custom';
 
-interface RouteOption {
-  id: string;
-  name: string;
-  travelTime: string;
-  distanceKm: number;
-  safetyScore: number;
-  highRiskIntersections: number;
-  activeIncidents: number;
-  threats: string[];
-  isSafest: boolean;
-}
+type RouteOption = SafeRouteAlt;
 
 const SIG_GREEN = '#7C3AED';
 const SIG_AMBER = '#FF9500';
@@ -47,54 +38,6 @@ const travelModes: { id: TravelMode; label: string; code: string; icon: typeof F
   { id: 'taxi',    label: 'Taxi/Mini',   code: 'TAXI',  icon: Bus },
   { id: 'cycling', label: 'Cycling',     code: 'CYCLE', icon: Bike },
 ];
-
-function generateMockRoutes(_origin: string, _destination: string, mode: TravelMode): RouteOption[] {
-  const baseTimes: Record<TravelMode, number> = { foot: 45, car: 18, taxi: 25, cycling: 30 };
-  const base = baseTimes[mode];
-
-  return [
-    {
-      id: 'safest',
-      name: 'TACTICAL // SAFEST',
-      travelTime: `${base + 5} min`,
-      distanceKm: +(Math.random() * 4 + 3).toFixed(1),
-      safetyScore: +(Math.random() * 2 + 8).toFixed(1),
-      highRiskIntersections: Math.floor(Math.random() * 2),
-      activeIncidents: Math.floor(Math.random() * 2),
-      threats: ['Moderate foot traffic after 20:00 — well-lit corridors'],
-      isSafest: true,
-    },
-    {
-      id: 'fastest',
-      name: 'DIRECT // FASTEST',
-      travelTime: `${base} min`,
-      distanceKm: +(Math.random() * 3 + 2).toFixed(1),
-      safetyScore: +(Math.random() * 3 + 4).toFixed(1),
-      highRiskIntersections: Math.floor(Math.random() * 4 + 2),
-      activeIncidents: Math.floor(Math.random() * 5 + 1),
-      threats: [
-        'Passes through high-incident zone near Long St',
-        'Limited CCTV coverage on Buitenkant St',
-        `${Math.floor(Math.random() * 3 + 1)} robbery reports in last 4h`,
-      ],
-      isSafest: false,
-    },
-    {
-      id: 'alternate',
-      name: 'BYPASS // ALTERNATE',
-      travelTime: `${base + 12} min`,
-      distanceKm: +(Math.random() * 5 + 4).toFixed(1),
-      safetyScore: +(Math.random() * 2 + 6).toFixed(1),
-      highRiskIntersections: Math.floor(Math.random() * 3 + 1),
-      activeIncidents: Math.floor(Math.random() * 3),
-      threats: [
-        'Low street lighting on sections of Main Rd',
-        'Construction detour near Salt River',
-      ],
-      isSafest: false,
-    },
-  ];
-}
 
 function tacticalScoreColor(s: number) {
   if (s >= 8) return SIG_GREEN;
@@ -135,8 +78,8 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
   const [customDate, setCustomDate] = useState<Date | undefined>(undefined);
   const [customTime, setCustomTime] = useState('18:00');
 
-  const [routes, setRoutes] = useState<RouteOption[] | null>(null);
-  const [calculating, setCalculating] = useState(false);
+  const [originCoords, setOriginCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [destCoords, setDestCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [expandedRoute, setExpandedRoute] = useState<string | null>(null);
 
   const [journeyActive, setJourneyActive] = useState(false);
@@ -147,27 +90,41 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
   const userLoc = useUserLocation();
   const { data: trafficData } = useTrafficIncidents();
   const { status: lsStatus } = useLoadshedding();
+  const { routes, loading: calculating, error: routeError, compute } = useSafeRoute();
+
   useEffect(() => {
     if (userLoc.nearestSuburb && !origin) {
       setOrigin(userLoc.nearestSuburb.suburb_name);
     } else if (userLoc.nearestArea && !origin) {
       setOrigin(userLoc.nearestArea.name);
     }
-  }, [userLoc.nearestSuburb, userLoc.nearestArea, origin]);
+    if (userLoc.coords && !originCoords) {
+      setOriginCoords(userLoc.coords);
+    }
+  }, [userLoc.nearestSuburb, userLoc.nearestArea, userLoc.coords, origin, originCoords]);
 
-  const calculateRoutes = () => {
+  const calculateRoutes = async () => {
     if (!origin.trim() || !destination.trim()) {
       toast.error('INPUT_ERR · ORIGIN_AND_DESTINATION_REQUIRED');
       return;
     }
-    setCalculating(true);
-    setRoutes(null);
-    setTimeout(() => {
-      setRoutes(generateMockRoutes(origin, destination, mode));
-      setCalculating(false);
-      toast.success('ROUTE_ANALYSIS · COMPLETE');
-    }, 1400);
+    if (!originCoords || !destCoords) {
+      toast.error('INPUT_ERR · SELECT_FROM_SUGGESTIONS_FOR_COORDINATES');
+      return;
+    }
+    const departureHour = timeOption === 'custom' && customTime
+      ? parseInt(customTime.split(':')[0], 10)
+      : new Date().getHours();
+    await compute(
+      { ...originCoords, label: origin },
+      { ...destCoords, label: destination },
+      mode,
+      departureHour,
+    );
+    if (routeError) toast.error(`ROUTE_ERR · ${routeError.toUpperCase()}`);
+    else toast.success('ROUTE_ANALYSIS · COMPLETE');
   };
+
 
   const startJourney = useCallback((_routeId: string) => {
     setJourneyActive(true);
@@ -330,7 +287,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
         <SuburbSearchInput
           placeholder="Current location or query suburb…"
           initialValue={origin}
-          onSelect={r => setOrigin(r.name)}
+          onSelect={r => { setOrigin(r.name); if (r.coordinates) setOriginCoords(r.coordinates); }}
         />
         {origin && (
           <div className="font-mono text-[10px] tracking-[0.1em] text-[#777] mt-2">
@@ -344,7 +301,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
         <SuburbSearchInput
           placeholder="Query destination suburb, ward or area…"
           initialValue={destination}
-          onSelect={r => setDestination(r.name)}
+          onSelect={r => { setDestination(r.name); if (r.coordinates) setDestCoords(r.coordinates); }}
         />
         {destination && (
           <div className="font-mono text-[10px] tracking-[0.1em] text-[#777] mt-2">
@@ -602,8 +559,21 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                         <span>{t}</span>
                       </div>
                     ))}
+                    <div className="grid grid-cols-3 gap-px bg-[#1A1A1A] mt-2">
+                      {[
+                        { l: 'TRAFFIC',  v: route.hazardBreakdown.traffic },
+                        { l: 'LOAD_SHED', v: route.hazardBreakdown.loadshedding },
+                        { l: 'CRIME_TOD', v: route.hazardBreakdown.crime },
+                      ].map(c => (
+                        <div key={c.l} className="bg-[#0A0A0A] px-2 py-1.5">
+                          <div className="font-mono text-[8px] tracking-[0.18em] text-[#555]">{c.l}</div>
+                          <div className="font-mono text-[11px] text-white tabular-nums">−{c.v.toFixed(1)}</div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
+
 
                 {/* Actions */}
                 <div className="flex items-stretch gap-px bg-[#1A1A1A]">
