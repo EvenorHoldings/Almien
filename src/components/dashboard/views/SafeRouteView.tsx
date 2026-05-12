@@ -422,9 +422,12 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                 ROUTES // {routes.length}_FOUND
               </span>
             </div>
-            <span className="font-mono text-[10px] tracking-[0.15em] text-[#555]">
-              {origin.toUpperCase().slice(0, 14)} → {destination.toUpperCase().slice(0, 14)}
-            </span>
+            <button
+              onClick={() => onNavigate('map-full' as ViewId)}
+              className="font-mono text-[10px] tracking-[0.2em] text-[#7C3AED] hover:text-white border border-[#7C3AED]/40 hover:border-[#7C3AED] px-2 py-1 transition-colors"
+            >
+              VIEW_ON_MAP ▸
+            </button>
           </div>
 
           {/* Commute Shield · hazard fusion strip */}
