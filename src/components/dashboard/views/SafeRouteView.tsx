@@ -301,7 +301,7 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
         <SuburbSearchInput
           placeholder="Query destination suburb, ward or area…"
           initialValue={destination}
-          onSelect={r => setDestination(r.name)}
+          onSelect={r => { setDestination(r.name); if (r.coordinates) setDestCoords(r.coordinates); }}
         />
         {destination && (
           <div className="font-mono text-[10px] tracking-[0.1em] text-[#777] mt-2">
