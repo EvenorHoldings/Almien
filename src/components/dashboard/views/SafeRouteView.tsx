@@ -15,6 +15,7 @@ import SuburbSearchInput from '../SuburbSearchInput';
 import { useUserLocation } from '@/hooks/useUserLocation';
 import { useTrafficIncidents } from '@/hooks/useTrafficIncidents';
 import { useLoadshedding } from '@/hooks/useLoadshedding';
+import { useSafeRoute, type SafeRouteAlt } from '@/hooks/useSafeRoute';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
