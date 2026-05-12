@@ -559,8 +559,21 @@ const SafeRouteView = memo(({ onNavigate }: Props) => {
                         <span>{t}</span>
                       </div>
                     ))}
+                    <div className="grid grid-cols-3 gap-px bg-[#1A1A1A] mt-2">
+                      {[
+                        { l: 'TRAFFIC',  v: route.hazardBreakdown.traffic },
+                        { l: 'LOAD_SHED', v: route.hazardBreakdown.loadshedding },
+                        { l: 'CRIME_TOD', v: route.hazardBreakdown.crime },
+                      ].map(c => (
+                        <div key={c.l} className="bg-[#0A0A0A] px-2 py-1.5">
+                          <div className="font-mono text-[8px] tracking-[0.18em] text-[#555]">{c.l}</div>
+                          <div className="font-mono text-[11px] text-white tabular-nums">−{c.v.toFixed(1)}</div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
+
 
                 {/* Actions */}
                 <div className="flex items-stretch gap-px bg-[#1A1A1A]">
