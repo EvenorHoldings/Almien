@@ -16,6 +16,7 @@ import { useUserLocation } from '@/hooks/useUserLocation';
 import { useTrafficIncidents } from '@/hooks/useTrafficIncidents';
 import { useLoadshedding } from '@/hooks/useLoadshedding';
 import { useSafeRoute, type SafeRouteAlt } from '@/hooks/useSafeRoute';
+import { useActiveRoutesStore } from '@/stores/activeRoutesStore';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
