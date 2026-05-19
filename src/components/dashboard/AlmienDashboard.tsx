@@ -373,7 +373,7 @@ const AlmienDashboard = memo(({ initialView = 'dashboard' }: AlmienDashboardProp
               </div>
               <ScrollArea className="w-[40%] min-w-0">
                 <div className="px-6 py-6 max-w-full content-panel">
-                  {renderView()}
+                  <Suspense fallback={<ViewFallback />}>{renderView()}</Suspense>
                 </div>
               </ScrollArea>
             </div>
@@ -384,7 +384,7 @@ const AlmienDashboard = memo(({ initialView = 'dashboard' }: AlmienDashboardProp
                 "mx-auto w-full max-w-full content-panel",
                 isMobile ? "max-w-full" : "px-8 py-8 max-w-[720px]"
               )}>
-                {renderView()}
+                <Suspense fallback={<ViewFallback />}>{renderView()}</Suspense>
               </div>
             </ScrollArea>
           )}
