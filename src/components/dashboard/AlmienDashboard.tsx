@@ -1,11 +1,10 @@
-import { useState, useCallback, useEffect, memo } from 'react';
+import { useState, useCallback, useEffect, memo, lazy, Suspense } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
 import AlmienSidebar from './AlmienSidebar';
 import TacticalNav, { type TacticalTab } from './TacticalNav';
-import CommandCenterHome from './CommandCenterHome';
 import SOSActionDock from './SOSActionDock';
 import ThreatHeader from './ThreatHeader';
 import TrialBanner from './TrialBanner';
@@ -13,53 +12,63 @@ import UpgradeModal from './UpgradeModal';
 import OnboardingFlow from '@/components/onboarding/OnboardingFlow';
 import ZoneDirectory from './widgets/ZoneDirectory';
 import SafiAI from '@/components/safi/SafiAI';
-import DashboardView from './views/DashboardView';
+
+// Eager: shell + the most likely first-paint surfaces.
+// CommandCenterHome (mobile /dashboard) and MapFullView (desktop split + /map)
+// are mounted on initial render so we ship them in the main chunk.
+import CommandCenterHome from './CommandCenterHome';
 import MapFullView from './views/MapFullView';
-import TacticalMapView from './views/TacticalMapView';
-import SafetyOverviewView from './views/SafetyOverviewView';
-import ActivitiesView from './views/ActivitiesView';
-import RideShareView from './views/RideShareView';
-import TrailSafetyView from './views/TrailSafetyView';
-import EmergencyContactsView from './views/EmergencyContactsView';
-import ProfessionalToolsView from './views/ProfessionalToolsView';
-import CommunityIntelView from './views/CommunityIntelView';
-import TrustGridView from './views/TrustGridView';
-import AlertsView from './views/AlertsView';
-import SettingsView from './views/SettingsView';
-import TrafficTransportView from './views/TrafficTransportView';
-import UtilitiesServicesView from './views/UtilitiesServicesView';
-import AirportInfoView from './views/AirportInfoView';
-import GovernmentServicesView from './views/GovernmentServicesView';
-import PredictiveAnalyticsView from './views/PredictiveAnalyticsView';
-import BiodiversityView from './views/BiodiversityView';
-import AccessibilityView from './views/AccessibilityView';
-import NightEconomyView from './views/NightEconomyView';
-import PredictiveMaintenanceView from './views/PredictiveMaintenanceView';
-import TrafficOptimizerView from './views/TrafficOptimizerView';
-import ExposureTrackerView from './views/ExposureTrackerView';
-import PermitReviewerView from './views/PermitReviewerView';
-import MicroclimateView from './views/MicroclimateView';
-import CarbonDashboardView from './views/CarbonDashboardView';
-import UtilityInsightsView from './views/UtilityInsightsView';
-import VolunteerMatchView from './views/VolunteerMatchView';
-import MunicipalScorecardView from './views/MunicipalScorecardView';
-import TourismHubView from './views/TourismHubView';
-import ResilienceView from './views/ResilienceView';
-import ApiHubView from './views/ApiHubView';
-import SACrimeLayerView from './views/SACrimeLayerView';
-import SafetyNetworkView from './views/SafetyNetworkView';
-import SafeRouteView from './views/SafeRouteView';
-import CorridorIntelView from './views/CorridorIntelView';
-import SafeSpaceView from './views/SafeSpaceView';
-import DarknessWindowView from './views/DarknessWindowView';
-import VehicleCrimeView from './views/VehicleCrimeView';
-import SchoolSafetyView from './views/SchoolSafetyView';
-import BusinessSafetyView from './views/BusinessSafetyView';
-import NeuralProfileView from './views/NeuralProfileView';
-import DarkZoneView from './views/DarkZoneView';
-import SafiConversationsView from './views/SafiConversationsView';
-import ProfileView from './views/ProfileView';
-import NeuralMeView from './views/NeuralMeView';
+
+// Lazy: every other view is route/state-gated. Splitting them out trims
+// ~14k lines of view code from the initial bundle and lets each view's
+// downstream dependencies (charts, heavy data) load only when shown.
+const DashboardView          = lazy(() => import('./views/DashboardView'));
+const TacticalMapView        = lazy(() => import('./views/TacticalMapView'));
+const SafetyOverviewView     = lazy(() => import('./views/SafetyOverviewView'));
+const ActivitiesView         = lazy(() => import('./views/ActivitiesView'));
+const RideShareView          = lazy(() => import('./views/RideShareView'));
+const TrailSafetyView        = lazy(() => import('./views/TrailSafetyView'));
+const EmergencyContactsView  = lazy(() => import('./views/EmergencyContactsView'));
+const ProfessionalToolsView  = lazy(() => import('./views/ProfessionalToolsView'));
+const CommunityIntelView     = lazy(() => import('./views/CommunityIntelView'));
+const TrustGridView          = lazy(() => import('./views/TrustGridView'));
+const AlertsView             = lazy(() => import('./views/AlertsView'));
+const SettingsView           = lazy(() => import('./views/SettingsView'));
+const TrafficTransportView   = lazy(() => import('./views/TrafficTransportView'));
+const UtilitiesServicesView  = lazy(() => import('./views/UtilitiesServicesView'));
+const AirportInfoView        = lazy(() => import('./views/AirportInfoView'));
+const GovernmentServicesView = lazy(() => import('./views/GovernmentServicesView'));
+const PredictiveAnalyticsView = lazy(() => import('./views/PredictiveAnalyticsView'));
+const BiodiversityView       = lazy(() => import('./views/BiodiversityView'));
+const AccessibilityView      = lazy(() => import('./views/AccessibilityView'));
+const NightEconomyView       = lazy(() => import('./views/NightEconomyView'));
+const PredictiveMaintenanceView = lazy(() => import('./views/PredictiveMaintenanceView'));
+const TrafficOptimizerView   = lazy(() => import('./views/TrafficOptimizerView'));
+const ExposureTrackerView    = lazy(() => import('./views/ExposureTrackerView'));
+const PermitReviewerView     = lazy(() => import('./views/PermitReviewerView'));
+const MicroclimateView       = lazy(() => import('./views/MicroclimateView'));
+const CarbonDashboardView    = lazy(() => import('./views/CarbonDashboardView'));
+const UtilityInsightsView    = lazy(() => import('./views/UtilityInsightsView'));
+const VolunteerMatchView     = lazy(() => import('./views/VolunteerMatchView'));
+const MunicipalScorecardView = lazy(() => import('./views/MunicipalScorecardView'));
+const TourismHubView         = lazy(() => import('./views/TourismHubView'));
+const ResilienceView         = lazy(() => import('./views/ResilienceView'));
+const ApiHubView             = lazy(() => import('./views/ApiHubView'));
+const SACrimeLayerView       = lazy(() => import('./views/SACrimeLayerView'));
+const SafetyNetworkView      = lazy(() => import('./views/SafetyNetworkView'));
+const SafeRouteView          = lazy(() => import('./views/SafeRouteView'));
+const CorridorIntelView      = lazy(() => import('./views/CorridorIntelView'));
+const SafeSpaceView          = lazy(() => import('./views/SafeSpaceView'));
+const DarknessWindowView     = lazy(() => import('./views/DarknessWindowView'));
+const VehicleCrimeView       = lazy(() => import('./views/VehicleCrimeView'));
+const SchoolSafetyView       = lazy(() => import('./views/SchoolSafetyView'));
+const BusinessSafetyView     = lazy(() => import('./views/BusinessSafetyView'));
+const NeuralProfileView      = lazy(() => import('./views/NeuralProfileView'));
+const DarkZoneView           = lazy(() => import('./views/DarkZoneView'));
+const SafiConversationsView  = lazy(() => import('./views/SafiConversationsView'));
+const ProfileView            = lazy(() => import('./views/ProfileView'));
+const NeuralMeView           = lazy(() => import('./views/NeuralMeView'));
+
 import { RegionProvider } from '@/contexts/RegionContext';
 import { SAPSCrimeProvider } from '@/contexts/SAPSCrimeContext';
 import { useDashboard } from '@/contexts/DashboardContext';
@@ -67,6 +76,16 @@ import PanicButton from './PanicButton';
 import WitnessReportButton from './WitnessReportButton';
 import CommandPill from './CommandPill';
 import TravelerModeView from './TravelerModeView';
+
+// Tactical loading placeholder — keeps panel height stable so Suspense
+// transitions don't cause layout reflow when a view's chunk arrives.
+const ViewFallback = () => (
+  <div className="w-full min-h-[60vh] flex items-center justify-center">
+    <div className="font-mono text-[10px] tracking-[0.2em] text-[#555] animate-pulse">
+      LOADING_MODULE…
+    </div>
+  </div>
+);
 
 export type ViewId =
   | 'dashboard'
@@ -354,7 +373,7 @@ const AlmienDashboard = memo(({ initialView = 'dashboard' }: AlmienDashboardProp
               </div>
               <ScrollArea className="w-[40%] min-w-0">
                 <div className="px-6 py-6 max-w-full content-panel">
-                  {renderView()}
+                  <Suspense fallback={<ViewFallback />}>{renderView()}</Suspense>
                 </div>
               </ScrollArea>
             </div>
@@ -365,7 +384,7 @@ const AlmienDashboard = memo(({ initialView = 'dashboard' }: AlmienDashboardProp
                 "mx-auto w-full max-w-full content-panel",
                 isMobile ? "max-w-full" : "px-8 py-8 max-w-[720px]"
               )}>
-                {renderView()}
+                <Suspense fallback={<ViewFallback />}>{renderView()}</Suspense>
               </div>
             </ScrollArea>
           )}
