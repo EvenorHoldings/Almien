@@ -1,11 +1,19 @@
 // Safi — Tactical AI Safety Concierge (Lovable AI Gateway, streaming)
+// Hardened: JWT validation, payload size caps, generic error responses.
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
+
+// ---- Limits (defence-in-depth against credit abuse) ----
+const MAX_BODY_BYTES = 32 * 1024;     // 32 KB request
+const MAX_MESSAGES   = 20;            // history depth
+const MAX_MSG_CHARS  = 2000;          // per-message
+const MAX_CTX_CHARS  = 200;           // per context field
 
 const SYSTEM_PROMPT = `You are SAFI — Almien's tactical AI safety concierge for South Africa, with deep specialization in the Western Cape and Cape Town.
 
@@ -28,17 +36,86 @@ RULES
 - Format responses for a small dark mobile terminal — keep paragraphs to 2-3 sentences.
 - Use plain markdown (lists, **bold**) — no HTML.`;
 
+const safeStr = (v: unknown, max: number): string =>
+  typeof v === "string" ? v.slice(0, max).replace(/[\x00-\x08\x0B-\x1F\x7F]/g, "") : "";
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { messages, context } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+    // --- 1. AuthN: require a signed-in user. Prevents anonymous credit drain. ---
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_ANON_KEY")!,
+    );
+    const token = authHeader.replace("Bearer ", "");
+    const { data: userData, error: authErr } = await supabase.auth.getUser(token);
+    if (authErr || !userData?.user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
-    const ctxBlock = context
-      ? `\n\nUSER CONTEXT (use only if relevant):\n- Suburb: ${context.suburb ?? "unknown"}\n- Commute: ${context.commute ?? "unknown"}\n- Risk tolerance: ${context.riskTolerance ?? "moderate"}\n- Local time: ${context.localTime ?? "unknown"}`
-      : "";
+    // --- 2. Body size + parse with hard cap before JSON.parse ---
+    const contentLen = Number(req.headers.get("content-length") ?? 0);
+    if (contentLen > MAX_BODY_BYTES) {
+      return new Response(JSON.stringify({ error: "Payload too large" }), {
+        status: 413,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const raw = await req.text();
+    if (raw.length > MAX_BODY_BYTES) {
+      return new Response(JSON.stringify({ error: "Payload too large" }), {
+        status: 413,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    let body: { messages?: unknown; context?: unknown };
+    try { body = JSON.parse(raw); } catch {
+      return new Response(JSON.stringify({ error: "Invalid JSON" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // --- 3. Validate + clamp messages & context ---
+    const rawMsgs = Array.isArray(body.messages) ? body.messages : [];
+    const messages = rawMsgs
+      .slice(-MAX_MESSAGES)
+      .filter((m: any) => m && (m.role === "user" || m.role === "assistant" || m.role === "system"))
+      .map((m: any) => ({
+        role: m.role,
+        content: safeStr(m.content, MAX_MSG_CHARS),
+      }))
+      .filter((m) => m.content.length > 0);
+
+    const ctxIn = (body.context ?? {}) as Record<string, unknown>;
+    const context = {
+      suburb:        safeStr(ctxIn.suburb, MAX_CTX_CHARS),
+      commute:       safeStr(ctxIn.commute, MAX_CTX_CHARS),
+      riskTolerance: safeStr(ctxIn.riskTolerance, 32),
+      localTime:     safeStr(ctxIn.localTime, 64),
+    };
+
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!LOVABLE_API_KEY) {
+      console.error("safi-chat: LOVABLE_API_KEY missing");
+      return new Response(JSON.stringify({ error: "Service unavailable" }), {
+        status: 503,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const ctxBlock = `\n\nUSER CONTEXT (use only if relevant):\n- Suburb: ${context.suburb || "unknown"}\n- Commute: ${context.commute || "unknown"}\n- Risk tolerance: ${context.riskTolerance || "moderate"}\n- Local time: ${context.localTime || "unknown"}`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -50,7 +127,7 @@ serve(async (req) => {
         model: "google/gemini-3-flash-preview",
         messages: [
           { role: "system", content: SYSTEM_PROMPT + ctxBlock },
-          ...(Array.isArray(messages) ? messages : []),
+          ...messages,
         ],
         stream: true,
       }),
@@ -81,9 +158,10 @@ serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
     });
   } catch (e) {
+    // Never leak internal exception details to the client.
     console.error("safi-chat error:", e);
     return new Response(
-      JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }),
+      JSON.stringify({ error: "An internal error occurred. Please try again." }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   }
