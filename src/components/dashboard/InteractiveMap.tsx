@@ -416,6 +416,7 @@ const InteractiveMap = ({ fullHeight = false }: InteractiveMapProps) => {
 
           {/* Phase A: register map with singleton + event bus */}
           <MapInstanceRegistrar />
+          <WardIntelLayer />
 
           {/* Floating tactical search overlay */}
           <MapSearchOverlay />
