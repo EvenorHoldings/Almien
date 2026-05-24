@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useWards, type Ward } from '@/hooks/useWards';
 import { useSafetyServices, type SafetyService, type ServiceType } from '@/hooks/useSafetyServices';
 import { BASE_TILE_URL, BASE_TILE_ATTRIBUTION, BASE_TILE_SUBDOMAINS, BASE_TILE_MAX_ZOOM } from '@/components/map/tileConfig';
+import WardIntelLayer from '@/components/ward-intel/WardIntelLayer';
 import 'leaflet/dist/leaflet.css';
 import type { ViewId } from '../AlmienDashboard';
 
@@ -137,6 +138,7 @@ const TacticalMapView = memo(({ onNavigate }: Props) => {
           maxZoom={BASE_TILE_MAX_ZOOM}
         />
         <MapWiring onMove={(lat, lng) => setCoords({ lat, lng })} />
+        <WardIntelLayer />
 
         <Marker position={CT_CENTER} icon={userPin} />
 
