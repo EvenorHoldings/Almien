@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
 
 export interface WardDetails {
   ward: { id: number; name: string; ward_number: number; lat: number; lng: number };
