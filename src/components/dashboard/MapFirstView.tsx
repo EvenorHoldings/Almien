@@ -354,6 +354,7 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
 
           {/* Phase A: register map with singleton + event bus */}
           <MapInstanceRegistrar />
+          <WardIntelLayer />
 
           {/* Floating tactical search overlay */}
           <MapSearchOverlay />
