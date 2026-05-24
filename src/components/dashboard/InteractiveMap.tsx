@@ -23,6 +23,7 @@ import CitizenReportsLayer from './CitizenReportsLayer';
 import { BASE_TILE_URL, BASE_TILE_ATTRIBUTION, BASE_TILE_SUBDOMAINS, BASE_TILE_MAX_ZOOM } from '@/components/map/tileConfig';
 import MapSearchOverlay from '@/components/map/MapSearchOverlay';
 import MapInstanceRegistrar from '@/components/map/core/MapInstanceRegistrar';
+import WardIntelLayer from '@/components/ward-intel/WardIntelLayer';
 import 'leaflet/dist/leaflet.css';
 
 // Fix for default markers
