@@ -368,6 +368,41 @@ export type Database = {
         }
         Relationships: []
       }
+      crime_stats: {
+        Row: {
+          count: number
+          created_at: string
+          crime_type: string
+          date: string
+          id: string
+          ward_id: number
+        }
+        Insert: {
+          count?: number
+          created_at?: string
+          crime_type: string
+          date: string
+          id?: string
+          ward_id: number
+        }
+        Update: {
+          count?: number
+          created_at?: string
+          crime_type?: string
+          date?: string
+          id?: string
+          ward_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crime_stats_ward_id_fkey"
+            columns: ["ward_id"]
+            isOneToOne: false
+            referencedRelation: "wards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       data_retention_policies: {
         Row: {
           archive_enabled: boolean | null
