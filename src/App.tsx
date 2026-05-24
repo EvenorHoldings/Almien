@@ -12,6 +12,7 @@ import AuthPage from "./pages/Auth";
 import DispatchPage from "./pages/Dispatch";
 import ResponderPage from "./pages/Responder";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import WardDetailPanel from "@/components/ward-intel/WardDetailPanel";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <WardDetailPanel />
           </BrowserRouter>
         </AuthProvider>
       </TooltipProvider>
