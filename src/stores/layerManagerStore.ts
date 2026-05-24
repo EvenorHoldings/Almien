@@ -69,6 +69,7 @@ const DEFAULT_LAYERS: ManagedLayer[] = [
   { id: 'data:water', name: 'Water', category: 'data', enabled: false, opacity: 0.8, zIndex: 170, color: '#0ea5e9' },
   { id: 'data:energy', name: 'Load Shedding', category: 'data', enabled: false, opacity: 0.8, zIndex: 170, color: '#eab308' },
   { id: 'data:wildfire', name: 'Wildfire (AFIS)', category: 'data', enabled: false, opacity: 0.9, zIndex: 230, color: '#ef4444', roleGate: ['analyst', 'responder', 'admin'] },
+  { id: 'data:ward-intel', name: 'Ward Intelligence', category: 'data', enabled: true, opacity: 0.9, zIndex: 160, color: '#7C3AED' },
 
   // User
   { id: 'user:reports', name: 'Citizen Reports', category: 'user', enabled: true, opacity: 1, zIndex: 240, color: '#f97316' },

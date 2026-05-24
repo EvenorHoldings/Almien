@@ -30,6 +30,7 @@ import AreaInfoCard from './AreaInfoCard';
 import { BASE_TILE_URL, BASE_TILE_ATTRIBUTION, BASE_TILE_SUBDOMAINS, BASE_TILE_MAX_ZOOM } from '@/components/map/tileConfig';
 import MapSearchOverlay from '@/components/map/MapSearchOverlay';
 import MapInstanceRegistrar from '@/components/map/core/MapInstanceRegistrar';
+import WardIntelLayer from '@/components/ward-intel/WardIntelLayer';
 import DrawingLayer from '@/components/map/DrawingLayer';
 import 'leaflet/dist/leaflet.css';
 
@@ -353,6 +354,7 @@ const MapFirstView = ({ fullHeight = true, onMapInteraction }: MapFirstViewProps
 
           {/* Phase A: register map with singleton + event bus */}
           <MapInstanceRegistrar />
+          <WardIntelLayer />
 
           {/* Floating tactical search overlay */}
           <MapSearchOverlay />
