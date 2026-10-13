@@ -28,7 +28,7 @@ const ZoneDirectory = memo(({ onClose, onSaveZone }: Props) => {
   const [sort, setSort] = useState<SortMode>('risk');
 
   const areas = useMemo(() => {
-    let list = query.trim() ? searchAreas(query) : [...capeTownAreas];
+    const list = query.trim() ? searchAreas(query) : [...capeTownAreas];
     if (sort === 'risk') {
       list.sort((a, b) => a.safetyScore - b.safetyScore); // highest risk first (lowest score)
     } else {

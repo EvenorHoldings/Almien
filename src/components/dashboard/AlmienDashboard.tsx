@@ -87,52 +87,9 @@ const ViewFallback = () => (
   </div>
 );
 
-export type ViewId =
-  | 'dashboard'
-  | 'map-full'
-  | 'safety-overview'
-  | 'areas'
-  | 'time-analytics'
-  | 'activities'
-  | 'rideshare'
-  | 'trails'
-  | 'emergency'
-  | 'pro-tools'
-  | 'community'
-  | 'alerts'
-  | 'traffic'
-  | 'utilities'
-  | 'airport'
-  | 'government'
-  | 'predictive'
-  | 'biodiversity'
-  | 'accessibility'
-  | 'night-economy'
-  | 'pred-maintenance'
-  | 'traffic-optimizer'
-  | 'exposure-tracker'
-  | 'permit-reviewer'
-  | 'microclimate'
-  | 'carbon-dashboard'
-  | 'utility-insights'
-  | 'volunteer-match'
-  | 'municipal-scorecard'
-  | 'tourism-hub'
-  | 'resilience'
-  | 'api-hub'
-  | 'sa-crime-layer'
-  | 'safety-network'
-  | 'safe-route'
-  | 'safe-space'
-  | 'darkness-windows'
-  | 'vehicle-crime'
-  | 'school-safety'
-  | 'business-safety'
-  | 'neural-profile'
-  | 'dark-zones'
-  | 'safi-history'
-  | 'profile'
-  | 'settings';
+export type { ViewId } from './viewIds';
+import { viewPath } from './viewIds';
+import type { ViewId } from './viewIds';
 
 interface AlmienDashboardProps {
   initialView?: ViewId;
@@ -199,10 +156,10 @@ const AlmienDashboard = memo(({ initialView = 'dashboard' }: AlmienDashboardProp
     } else {
       setActiveView(view);
     }
-    // Mirror to URL when this maps to a top-level tab
-    const tab = VIEW_TO_TAB[view];
-    if (tab && location.pathname !== TAB_TO_PATH[tab]) {
-      routerNavigate(TAB_TO_PATH[tab]);
+    // Mirror every view to its own URL so it can be bookmarked / shared
+    const path = viewPath(view === 'areas' || view === 'time-analytics' ? 'dashboard' : view);
+    if (location.pathname !== path) {
+      routerNavigate(path);
     }
     if (isMobile) setSidebarOpen(false);
   }, [isMobile, location.pathname, routerNavigate]);

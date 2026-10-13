@@ -96,7 +96,7 @@ const PanicButton = memo(() => {
     if (panicActive) return;
     setHolding(true);
     setProgress(0);
-    try { navigator.vibrate?.([20]); } catch {}
+    try { navigator.vibrate?.([20]); } catch { /* best-effort */ }
 
     const startTime = Date.now();
     progressInterval.current = setInterval(() => {
@@ -105,7 +105,7 @@ const PanicButton = memo(() => {
       setProgress(pct);
       if (pct >= 100) {
         clearTimers();
-        try { navigator.vibrate?.([100, 50, 100, 50, 200]); } catch {}
+        try { navigator.vibrate?.([100, 50, 100, 50, 200]); } catch { /* best-effort */ }
         triggerPanic();
       }
     }, 30);

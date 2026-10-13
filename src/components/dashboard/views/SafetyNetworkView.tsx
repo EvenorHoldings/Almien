@@ -31,7 +31,7 @@ interface Props {
   onNavigate: (view: ViewId) => void;
 }
 
-const SafetyNetworkView = memo(({ }: Props) => {
+const SafetyNetworkView = memo((_props: Props) => {
   const [contacts, setContacts] = useState<TrustedContact[]>([
     { id: '1', name: 'Mom', phone: '+27821234567', role: 'primary' },
     { id: '2', name: 'ADT Response', phone: '+27860100111', role: 'armed-response' },

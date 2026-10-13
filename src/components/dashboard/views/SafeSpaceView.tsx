@@ -94,7 +94,7 @@ const bedsBadge = {
 
 // ── Component ──────────────────────────────────────────────────────────
 
-const SafeSpaceView = memo(({ }: Props) => {
+const SafeSpaceView = memo((_props: Props) => {
   const [tab, setTab] = useState<SafeSpaceTab>('heatmap');
   const [filters, setFilters] = useState<Set<GBVFilter>>(new Set(['domestic', 'sexual-assault', 'stalking', 'child-abuse']));
   const [shelterSearch, setShelterSearch] = useState('');
@@ -103,7 +103,7 @@ const SafeSpaceView = memo(({ }: Props) => {
   const toggleFilter = useCallback((f: GBVFilter) => {
     setFilters(prev => {
       const next = new Set(prev);
-      next.has(f) ? next.delete(f) : next.add(f);
+      if (next.has(f)) next.delete(f); else next.add(f);
       return next;
     });
   }, []);

@@ -178,7 +178,7 @@ const TrafficTransportView = memo(({ onUpgrade }: Props) => {
           ))}
         </div>
         <a
-          href="https://myciti.org.za/en/service-disruptions/"
+          href="https://www.myciti.org.za/en/timetables/planned-service-disruptions/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block tap"

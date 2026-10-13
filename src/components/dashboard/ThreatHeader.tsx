@@ -1,6 +1,7 @@
 import { memo, useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronDown, MapPin, Plus, Menu, Locate, Wifi, WifiOff, Activity, Plane } from 'lucide-react';
+import AccountMenu from '@/components/auth/AccountMenu';
 import { useUserLocation } from '@/hooks/useUserLocation';
 
 type ConnectionStatus = 'live' | 'syncing' | 'offline';
@@ -292,6 +293,7 @@ const ThreatHeader = memo(({
             {now.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' })}
           </span>
         </div>
+        <AccountMenu />
       </div>
     </div>
   );

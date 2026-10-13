@@ -76,7 +76,7 @@ const ComparisonView = ({ onHighlightedWardsChange, onHoveredWardChange }: Compa
   };
 
   const getSortedWards = () => {
-    let filtered = filterType === 'all' 
+    const filtered = filterType === 'all' 
       ? wardData 
       : wardData.filter(w => w.type === filterType);
     

@@ -65,11 +65,7 @@ export function useRealtimeQuery<T>({
           updateLastFetch();
         }
       )
-      .subscribe((status) => {
-        if (status === 'SUBSCRIBED') {
-          console.log(`[Realtime] Subscribed to ${table}`);
-        }
-      });
+      .subscribe();
 
     return () => {
       if (channelRef.current) {

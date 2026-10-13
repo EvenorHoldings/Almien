@@ -118,7 +118,8 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
     (text: string) => {
       if (!ttsSupported || !safiVoiceReplies) return;
       try {
-        const cleaned = text.replace(/[*#`>_~\-•✦✓⚠💜⚡🌙🏃🧭🛡🌐]/g, '').replace(/\n+/g, '. ').trim();
+        // eslint-disable-next-line no-misleading-character-class -- intentional emoji strip list
+    const cleaned = text.replace(/[*#`>_~\-•✦✓⚠💜⚡🌙🏃🧭🛡🌐]/g, '').replace(/\n+/g, '. ').trim();
         const utter = new SpeechSynthesisUtterance(cleaned);
         utter.lang = 'en-ZA';
         utter.rate = 1.05;
@@ -337,10 +338,10 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
         }
       };
       rec.onerror = () => {
-        if (!stopped) setTimeout(() => { try { rec.start(); } catch {} }, 1500);
+        if (!stopped) setTimeout(() => { try { rec.start(); } catch { /* best-effort */ } }, 1500);
       };
       rec.onend = () => {
-        if (!stopped && safiHotwordEnabled) { try { rec.start(); } catch {} }
+        if (!stopped && safiHotwordEnabled) { try { rec.start(); } catch { /* best-effort */ } }
       };
       rec.start();
       hotwordRef.current = rec;
@@ -349,7 +350,7 @@ const SafiAI = memo(({ isOpen, onClose, onNavigate, initialMode = 'chat' }: Safi
     }
     return () => {
       stopped = true;
-      try { hotwordRef.current?.stop?.(); } catch {}
+      try { hotwordRef.current?.stop?.(); } catch { /* best-effort */ }
       setHotwordActive(false);
     };
   }, [safiHotwordEnabled, voiceSupported, isListening, startVoiceInput]);
