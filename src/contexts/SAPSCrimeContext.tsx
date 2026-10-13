@@ -76,8 +76,7 @@ export function SAPSCrimeProvider({ children }: { children: ReactNode }) {
 
   const refreshData = useCallback(() => {
     setIsRefreshing(true);
-    console.log('Fetching latest SAPS Q4... (mock — will use API/scrape when available)');
-    // Simulate network delay then reset to baseline (future: real fetch)
+    // TODO: replace mock refresh with real SAPS fetch. Simulate network delay then reset to baseline (future: real fetch)
     setTimeout(() => {
       setCrimeData(prev => ({ ...prev, lastSynced: new Date().toISOString() }));
       setIsRefreshing(false);

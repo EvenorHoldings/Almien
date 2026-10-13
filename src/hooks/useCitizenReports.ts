@@ -37,8 +37,7 @@ export const useCitizenReports = () => {
           schema: 'public',
           table: 'citizen_reports',
         },
-        (payload) => {
-          console.log('Realtime update:', payload);
+        () => {
           queryClient.invalidateQueries({ queryKey: ['citizen-reports'] });
         }
       )

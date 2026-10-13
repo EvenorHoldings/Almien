@@ -37,6 +37,7 @@ RULES
 - Use plain markdown (lists, **bold**) — no HTML.`;
 
 const safeStr = (v: unknown, max: number): string =>
+  // eslint-disable-next-line no-control-regex -- strip control chars from user input
   typeof v === "string" ? v.slice(0, max).replace(/[\x00-\x08\x0B-\x1F\x7F]/g, "") : "";
 
 serve(async (req) => {

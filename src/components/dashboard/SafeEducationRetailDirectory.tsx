@@ -201,7 +201,7 @@ const SafeEducationRetailDirectory = memo(() => {
           <span className="text-[10px] text-muted-foreground/70">Always confirm current details</span>
           <span className="text-[10px] text-muted-foreground/50">•</span>
           <a
-            href="https://www.westerncape.gov.za/general-publication/find-school"
+            href="https://wcedemis.westerncape.gov.za/wced/findaschool.html"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[10px] text-primary/70 hover:text-primary flex items-center gap-0.5"

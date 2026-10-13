@@ -40,7 +40,7 @@ const WitnessReportButton = memo(() => {
     <>
       {/* Floating eye icon */}
       <button
-        onClick={() => { setOpen(true); try { navigator.vibrate?.([15]); } catch {} }}
+        onClick={() => { setOpen(true); try { navigator.vibrate?.([15]); } catch { /* best-effort */ } }}
         className={cn(
           "fixed z-[93] w-11 h-11 rounded-full right-4 md:right-6 md:bottom-6",
           "bg-card border border-border shadow-lg",

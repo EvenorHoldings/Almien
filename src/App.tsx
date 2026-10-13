@@ -12,6 +12,11 @@ import AuthPage from "./pages/Auth";
 import DispatchPage from "./pages/Dispatch";
 import ResponderPage from "./pages/Responder";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import ViewRoute from "./pages/ViewRoute";
+import About from "./pages/legal/About";
+import Privacy from "./pages/legal/Privacy";
+import Terms from "./pages/legal/Terms";
+import Licenses from "./pages/legal/Licenses";
 import WardDetailPanel from "@/components/ward-intel/WardDetailPanel";
 
 const queryClient = new QueryClient();
@@ -32,6 +37,11 @@ const App = () => (
               <Route path="/routes"  element={<Index initialView="safe-route" />} />
               <Route path="/network" element={<Index initialView="community" />} />
               <Route path="/me"      element={<Index initialView="profile" />} />
+              <Route path="/view/:id" element={<ViewRoute />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/licenses" element={<Licenses />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route
                 path="/dispatch"

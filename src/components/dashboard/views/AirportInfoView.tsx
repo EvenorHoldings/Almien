@@ -187,7 +187,7 @@ const AirportInfoView = memo(({ onUpgrade }: Props) => {
             </div>
           </div>
           <div className="flex gap-2">
-            <a href="https://www.airports.co.za/flight-information" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.airports.co.za/airports/cape-town-international-airport/the-airport/flight-information" target="_blank" rel="noopener noreferrer"
               className="text-xs px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:opacity-90">
               ACSA Flights
             </a>

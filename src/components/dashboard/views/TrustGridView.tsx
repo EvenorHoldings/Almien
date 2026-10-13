@@ -165,7 +165,7 @@ const FeedRow = memo(({ item }: { item: FeedItem }) => (
 FeedRow.displayName = 'FeedRow';
 
 /* ─── Main view ─────────────────────────── */
-const TrustGridView = memo(({ }: Props) => {
+const TrustGridView = memo((_props: Props) => {
   const [guardians] = useState<Guardian[]>(MOCK_GUARDIANS);
 
   const stats = useMemo(() => {

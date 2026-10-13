@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { memo, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { 
@@ -412,8 +413,8 @@ const SettingsView = memo(({ onUpgrade }: Props) => {
             <span className="text-xs text-muted-foreground">Off</span>
           </div>
           <div className="flex gap-3 text-xs text-primary">
-            <a href="#" className="hover:underline">Privacy Policy</a>
-            <a href="#" className="hover:underline">Terms of Service</a>
+            <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
+            <Link to="/terms" className="hover:underline">Terms of Service</Link>
           </div>
         </div>
       </div>
@@ -470,10 +471,10 @@ const SettingsView = memo(({ onUpgrade }: Props) => {
           <div>Almien v2.0.0</div>
           <div>© 2026 Almien Safety Intelligence</div>
           <div className="flex gap-3 text-xs text-primary mt-2">
-            <a href="#" className="hover:underline">Terms</a>
-            <a href="#" className="hover:underline">Privacy</a>
-            <a href="#" className="hover:underline">Licenses</a>
-            <a href="#" className="hover:underline">About Us</a>
+            <Link to="/terms" className="hover:underline">Terms</Link>
+            <Link to="/privacy" className="hover:underline">Privacy</Link>
+            <Link to="/licenses" className="hover:underline">Licenses</Link>
+            <Link to="/about" className="hover:underline">About Us</Link>
           </div>
         </div>
       </div>
