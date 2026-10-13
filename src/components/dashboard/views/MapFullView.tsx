@@ -12,6 +12,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/contexts/AuthContext';
 import { useAlmienStore } from '@/stores/almienStore';
 import { toast } from 'sonner';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -106,7 +107,7 @@ const FirstVisitModal = memo(({ onClose }: { onClose: () => void }) => (
       </div>
       <h2 className="font-[family-name:'Space_Grotesk'] text-2xl font-bold text-white tracking-tight mb-1">
         ALMIEN<span className="text-[#7C3AED]">.</span>MAP
-      </h2>
+       <DemoBadge className="ml-2 align-middle" /></h2>
       <p className="font-mono text-[11px] text-[#999] mb-5 leading-relaxed">
         Tactical overlay for South African urban risk. SAPS feed + verified citizen mesh.
       </p>

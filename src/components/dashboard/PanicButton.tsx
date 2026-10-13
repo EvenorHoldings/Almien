@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect, memo } from 'react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import DemoBadge from '@/components/DemoBadge';
 
 interface PanicContact {
   name: string;
@@ -202,7 +203,7 @@ const PanicButton = memo(() => {
             <section>
               <div className="flex items-center justify-between mb-2 px-1">
                 <div className="font-mono text-[10px] tracking-[0.15em] text-foreground/40">
-                  ▸ TRUSTED_NETWORK
+                  ▸ TRUSTED_NETWORK <DemoBadge label="Sample contacts" className="ml-1" />
                 </div>
                 <div className="font-mono text-[10px] tracking-[0.15em] text-accent-safe">
                   {notifiedContacts}/{contacts.length} ACK

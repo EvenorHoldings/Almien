@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { AlertTriangle, Zap, Lightbulb, Eye, EyeOff, MapPin } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import DemoBadge from '@/components/DemoBadge';
 
 /**
  * Zero-Visibility Zones: Overlays loadshedding outages with
@@ -44,6 +45,7 @@ const ZeroVisibilityZones = memo(() => {
         <div className="flex items-center gap-2">
           <EyeOff className="w-4 h-4 text-destructive" />
           <h3 className="font-bold text-foreground text-sm">Zero-Visibility Zones</h3>
+          <DemoBadge />
         </div>
         <Badge variant="destructive" className="text-[10px]">
           {criticalCount} HIGH RISK

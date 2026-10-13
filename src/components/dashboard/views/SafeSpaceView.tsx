@@ -9,6 +9,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import type { ViewId } from '../AlmienDashboard';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -144,7 +145,7 @@ const SafeSpaceView = memo((_props: Props) => {
             <Heart className="w-5 h-5 text-accent-gbv" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Safe Space</h1>
+            <h1 className="text-2xl font-bold text-foreground">Safe Space <DemoBadge className="ml-2 align-middle" /></h1>
             <p className="text-sm text-muted-foreground">GBV & Femicide Intelligence · Confidential · You are not alone</p>
           </div>
         </div>

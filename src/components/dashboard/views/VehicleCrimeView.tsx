@@ -12,6 +12,7 @@ import {
   CircleAlert, Siren, Ban, Target, Crosshair
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import DemoBadge from '@/components/DemoBadge';
 
 type TabId = 'hotspots' | 'commute' | 'route-risks' | 'stolen' | 'cit-atm';
 
@@ -67,7 +68,7 @@ const HotspotsTab = () => (
         <CardTitle className="text-base flex items-center gap-2">
           <Crosshair className="w-4 h-4 text-destructive" />
           Hijacking Hotspot Map Layer
-        </CardTitle>
+         <DemoBadge className="ml-2 align-middle" /></CardTitle>
         <p className="text-xs text-muted-foreground">Toggle "Vehicle Crime" on the main map to overlay hijacking corridors and high-risk intersections.</p>
       </CardHeader>
       <CardContent>
@@ -126,7 +127,7 @@ const CommuteTab = () => {
           <CardTitle className="text-base flex items-center gap-2">
             <Car className="w-4 h-4 text-primary" />
             My Vehicle & Commute
-          </CardTitle>
+           <DemoBadge className="ml-2 align-middle" /></CardTitle>
           <p className="text-xs text-muted-foreground">Enter your vehicle and commute details for a personalised hijacking risk assessment.</p>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -161,7 +162,7 @@ const CommuteTab = () => {
             <CardTitle className="text-base flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-500" />
               Your Hijacking Risk Score
-            </CardTitle>
+             <DemoBadge className="ml-2 align-middle" /></CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center gap-4">
@@ -221,7 +222,7 @@ const RouteRisksTab = () => (
         <CardTitle className="text-base flex items-center gap-2">
           <Navigation className="w-4 h-4 text-amber-500" />
           Route Risk Intersections
-        </CardTitle>
+         <DemoBadge className="ml-2 align-middle" /></CardTitle>
         <p className="text-xs text-muted-foreground">High-risk intersections flagged along your planned routes. Each includes tactical safety guidance.</p>
       </CardHeader>
       <CardContent className="space-y-3">

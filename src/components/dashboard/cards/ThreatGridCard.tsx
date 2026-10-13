@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSAPSCrime } from '@/contexts/SAPSCrimeContext';
+import DemoBadge from '@/components/DemoBadge';
 
 /* ── Crime type config ─────────────────────────────── */
 interface CrimeType {
@@ -220,7 +221,7 @@ const ThreatGridCard = memo(() => {
               <CardTitle className="text-sm font-semibold flex items-center gap-2">
                 <Crosshair className="w-4 h-4 text-destructive" />
                 Real-Time Threat Grid
-              </CardTitle>
+               <DemoBadge className="ml-2 align-middle" /></CardTitle>
               <Badge variant="outline" className="text-destructive border-destructive/30 text-[10px]">
                 <div className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse-subtle mr-1" />
                 LIVE · {filteredIncidents.length} incidents
@@ -395,7 +396,7 @@ const ThreatGridCard = memo(() => {
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
               <Shield className="w-4 h-4 text-destructive" />
               Top 10 High-Risk Precincts
-            </CardTitle>
+             <DemoBadge className="ml-2 align-middle" /></CardTitle>
             <p className="text-[10px] text-muted-foreground mt-0.5">Western Cape · Live severity index</p>
           </CardHeader>
           <CardContent className="px-4 pb-4">

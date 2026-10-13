@@ -5,6 +5,7 @@ import NearestEmergencyCard from './NearestEmergencyCard';
 import LoadSheddingBadge from './LoadSheddingBadge';
 import { useProactiveSafetyAlerts } from '@/hooks/useProactiveSafetyAlerts';
 import type { ViewId } from './AlmienDashboard';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onNavigate: (view: ViewId) => void;
@@ -76,7 +77,7 @@ const CommandCenterHome = memo(({ onNavigate, onOpenSafi }: Props) => {
       {/* THREAT TICKER */}
       <section className="mt-6">
         <div className="px-5 flex items-center justify-between mb-2">
-          <span className="label-micro">LIVE THREATS</span>
+          <span className="label-micro">LIVE THREATS</span> <DemoBadge className="ml-2" />
           <button onClick={() => onNavigate('alerts')} className="btn-ghost p-0">VIEW ALL ↗</button>
         </div>
         <div className="px-5 flex gap-2 overflow-x-auto scrollbar-none" style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
@@ -99,7 +100,7 @@ const CommandCenterHome = memo(({ onNavigate, onOpenSafi }: Props) => {
       {/* INCIDENT FEED */}
       <section className="mt-6">
         <div className="px-5 flex items-center justify-between mb-2">
-          <span className="label-micro">INCIDENT FEED</span>
+          <span className="label-micro">INCIDENT FEED <DemoBadge className="ml-2" /></span>
           <button aria-label="Filter" className="p-1">
             <Filter size={16} color="#555" />
           </button>

@@ -11,6 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import SafetyPulse from '../SafetyPulse';
 import type { ViewId } from '../AlmienDashboard';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -152,7 +153,7 @@ const CommunityIntelView = memo(({ onUpgrade }: Props) => {
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Community Intelligence Mesh</h1>
+        <h1 className="text-3xl font-bold text-foreground">Community Intelligence Mesh <DemoBadge className="ml-2 align-middle" /></h1>
         <p className="text-muted-foreground mt-1">Crowdsourced safety intelligence from your neighbourhood</p>
       </div>
 
