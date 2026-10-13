@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import type { ViewId } from '../AlmienDashboard';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -145,7 +146,7 @@ const SettingsView = memo(({ onUpgrade }: Props) => {
       {/* ═══════════════════════════════════════════════════════ */}
       <div className="p-6 rounded-xl border border-border bg-card">
         <h2 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
-          <Download className="w-5 h-5 text-primary" /> Offline Safety Maps
+          <Download className="w-5 h-5 text-primary" /> Offline Safety Maps <DemoBadge />
         </h2>
         <p className="text-sm text-muted-foreground mb-4">
           Download safety map packs for your suburb and up to 3 nearby areas. Includes roads, risk zones, shelters, SAPS stations, and your Trusted Network contacts. Auto-updates on WiFi.

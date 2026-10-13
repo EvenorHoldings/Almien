@@ -23,6 +23,7 @@ import ResponseLeaderboardCard from '@/components/dashboard/cards/ResponseLeader
 import ThreatGridCard from '@/components/dashboard/cards/ThreatGridCard';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import DemoBadge from '@/components/DemoBadge';
 
 /* ── Static chart data (non-SAPS) ──────────────────────── */
 
@@ -181,6 +182,7 @@ const SACrimeLayerView = memo(() => {
           <h2 className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
             <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
             SA Crime & Loadshedding Intelligence
+            <DemoBadge label="Static snapshot" />
           </h2>
           <p className="text-xs text-muted-foreground mt-0.5">SAPS {crimeData.quarter} · {crimeData.period}</p>
         </div>

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { Bell, AlertTriangle, Zap, Flame, ShieldAlert } from 'lucide-react';
+import DemoBadge from '@/components/DemoBadge';
 
 const mockAlerts = [
   { id: 1, text: 'Stage 4 loadshedding active — Nyanga, Mfuleni, Delft affected', severity: 'high', icon: 'zap', time: '2 min ago' },
@@ -54,7 +55,7 @@ const LiveAlertsCard = () => {
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
             <Bell className="w-4 h-4 text-safety-yellow" />
             Live Safety Alerts
-          </CardTitle>
+           <DemoBadge className="ml-2 align-middle" /></CardTitle>
           <Badge variant="outline" className="text-primary border-primary/30 text-[9px]">
             <span className="relative flex h-1.5 w-1.5 mr-1">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />

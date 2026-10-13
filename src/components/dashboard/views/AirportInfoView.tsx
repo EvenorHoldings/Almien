@@ -8,6 +8,7 @@ import { useFlights } from '@/hooks/useFlights';
 import { useWeather, getWeatherIcon } from '@/hooks/useWeather';
 import { useESPStatus, useESPArea, useProxyWeather } from '@/hooks/useApiProxy';
 import type { ViewId } from '../AlmienDashboard';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props { onUpgrade: (trigger?: string) => void; onNavigate: (view: ViewId) => void; }
 
@@ -57,6 +58,8 @@ const AirportInfoView = memo(({ onUpgrade }: Props) => {
   const departures = dbDepartures.length > 0
     ? dbDepartures.map(f => ({ id: f.id, flight: f.flight_number, route: `Cape Town → ${f.origin_destination}`, status: f.status, gate: f.gate || '-', scheduled: f.scheduled_time?.slice(11, 16) || '', actual: f.actual_time?.slice(11, 16) || null, airline: f.airline, aircraft: '' }))
     : mockDepartures;
+
+  const flightsAreDemo = !flightsLoading && dbArrivals.length === 0 && dbDepartures.length === 0;
 
   const currentStage = espStatus?.capetown_stage ?? espStatus?.eskom_stage ?? espStatus?.stage ?? 0;
   const wx = airportWeather || (weather ? { temp: weather.temperature_celsius, wind_speed: weather.wind_speed_kmh, description: weather.description, icon: weather.icon_code, wind_alert: (weather.wind_speed_kmh || 0) > 40, status: 'live' as const, feels_like: 0, wind_direction: '', humidity: 0 } : null);
@@ -170,7 +173,7 @@ const AirportInfoView = memo(({ onUpgrade }: Props) => {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold font-mono text-foreground">287</p><p className="text-xs text-muted-foreground">Flights Today</p></CardContent></Card>
+        <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold font-mono text-foreground">{flightsAreDemo ? '—' : dbArrivals.length + dbDepartures.length}</p><p className="text-xs text-muted-foreground">Flights Today</p></CardContent></Card>
         <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold font-mono text-emerald-400">89%</p><p className="text-xs text-muted-foreground">On Time</p></CardContent></Card>
         <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold font-mono text-amber-400">24</p><p className="text-xs text-muted-foreground">Delayed</p></CardContent></Card>
         <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold font-mono text-red-400">3</p><p className="text-xs text-muted-foreground">Cancelled</p></CardContent></Card>
@@ -202,6 +205,7 @@ const AirportInfoView = memo(({ onUpgrade }: Props) => {
       <div className="flex gap-2">
         <button onClick={() => setTab('arrivals')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === 'arrivals' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-foreground hover:bg-accent'}`}>Arrivals</button>
         <button onClick={() => setTab('departures')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === 'departures' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-foreground hover:bg-accent'}`}>Departures</button>
+        {flightsAreDemo && <DemoBadge className="self-center" />}
       </div>
 
       {/* Flights */}

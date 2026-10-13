@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import { Crown, X, Check, Shield, Users, Home } from 'lucide-react';
 import { useElite } from '@/hooks/useElite';
 import { useToast } from '@/hooks/use-toast';
+import DemoBadge from '@/components/DemoBadge';
 
 interface UpgradeModalProps {
   isOpen: boolean;
@@ -137,6 +138,7 @@ const UpgradeModal = memo(({ isOpen, onClose, trigger }: UpgradeModalProps) => {
             <Crown className="w-3.5 h-3.5" />
             ALMIEN ELITE
           </div>
+          <DemoBadge label="Demo checkout — no charge" className="mb-2" />
           <h2 className="text-xl sm:text-2xl font-bold text-foreground">
             {trigger ?? 'Unlock the full Safi intelligence layer'}
           </h2>

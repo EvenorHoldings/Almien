@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import { touristSites, beachSafety } from '@/data/suburbIntelligence';
 import { cn } from '@/lib/utils';
+import { useSafeZones } from '@/hooks/useSafeZones';
+import DemoBadge from '@/components/DemoBadge';
 
 type MobilityProfile = 'walking' | 'cycling' | 'hiking';
 
@@ -23,14 +25,6 @@ interface CautionZone {
   risk: 'isolated' | 'low-visibility' | 'high-traffic';
   description: string;
 }
-
-// Mock data for Safe Havens
-const safeHavens: SafeHaven[] = [
-  { id: '1', name: 'CCID Urban Safety', type: 'cid', distance: '350m', address: 'Long Street, CBD', contact: '021 426 1325' },
-  { id: '2', name: 'Cape Town Central SAPS', type: 'police', distance: '500m', address: 'Buitenkant Street', contact: '021 467 8000' },
-  { id: '3', name: 'V&A Waterfront Security', type: 'cid', distance: '800m', address: 'V&A Waterfront', contact: '021 408 7600' },
-  { id: '4', name: 'Sea Point CID', type: 'cid', distance: '1.2km', address: 'Main Road, Sea Point', contact: '021 434 1010' },
-];
 
 // Mock data for Pickpocket Hot Zones
 const pickpocketZones = [
@@ -57,6 +51,19 @@ const weatherConditions = {
 };
 
 const TravelerModeView = () => {
+  const { data: zones, isLoading: zonesLoading } = useSafeZones();
+  const safeHavens: SafeHaven[] = (zones ?? [])
+    .filter(z => z.contact_number)
+    .sort((a, b) => Number(b.verified) - Number(a.verified) || b.safety_rating - a.safety_rating)
+    .slice(0, 6)
+    .map(z => ({
+      id: z.id,
+      name: z.name,
+      type: z.zone_type === 'police_station' ? 'police' : 'cid',
+      distance: z.is_24_hours ? '24h' : (z.neighborhood ?? ''),
+      address: z.address,
+      contact: z.contact_number ?? '',
+    }));
   const [activeProfile, setActiveProfile] = useState<MobilityProfile>('walking');
   const hikingSites = touristSites.filter(site => site.type === 'hiking');
   const beachSites = beachSafety.slice(0, 4);
@@ -125,6 +132,7 @@ const TravelerModeView = () => {
                     </div>
                   </div>
                   <h2 className="font-bold text-white uppercase tracking-wide">Pickpocket Hot Zones</h2>
+                  <DemoBadge className="ml-auto" />
                 </div>
               </div>
               <div className="p-4 space-y-2">
@@ -162,6 +170,8 @@ const TravelerModeView = () => {
                 </div>
               </div>
               <div className="p-4 space-y-2">
+                {zonesLoading && <p className="text-xs text-muted-foreground">Loading safe havens…</p>}
+                {!zonesLoading && safeHavens.length === 0 && <p className="text-xs text-muted-foreground">No safe havens found.</p>}
                 {safeHavens.map(haven => (
                   <a
                     key={haven.id}
@@ -199,6 +209,7 @@ const TravelerModeView = () => {
                 <div className="flex items-center gap-2">
                   <Wind className="w-5 h-5 text-sky-400" />
                   <h2 className="font-bold text-white uppercase tracking-wide">Wind & Visibility</h2>
+                  <DemoBadge className="ml-auto" />
                 </div>
               </div>
               <div className="p-4 grid grid-cols-2 gap-4">
@@ -241,6 +252,7 @@ const TravelerModeView = () => {
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="w-5 h-5 text-orange-400" />
                   <h2 className="font-bold text-white uppercase tracking-wide">Caution Zones</h2>
+                  <DemoBadge className="ml-auto" />
                 </div>
               </div>
               <div className="p-4 space-y-2">

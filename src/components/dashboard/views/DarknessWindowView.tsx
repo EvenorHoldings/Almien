@@ -10,6 +10,7 @@ import { Progress } from '@/components/ui/progress';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import type { ViewId } from '../AlmienDashboard';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onUpgrade?: (trigger?: string) => void;
@@ -141,7 +142,7 @@ const DarknessWindowView = memo(({ onUpgrade }: Props) => {
             <Zap className="w-5 h-5 text-safety-yellow" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Darkness Windows</h1>
+            <h1 className="text-3xl font-bold text-foreground">Darkness Windows <DemoBadge className="ml-2 align-middle" /></h1>
             <p className="text-muted-foreground text-sm">Load-shedding × Crime vulnerability intelligence</p>
           </div>
         </div>

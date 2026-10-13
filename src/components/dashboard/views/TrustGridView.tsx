@@ -2,6 +2,7 @@ import { memo, useMemo, useState } from 'react';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import type { ViewId } from '../AlmienDashboard';
 import { useCountUp } from '@/hooks/useCountUp';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onUpgrade?: (trigger?: string) => void;
@@ -191,7 +192,7 @@ const TrustGridView = memo((_props: Props) => {
         <h1 className="text-white"
           style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 22, fontWeight: 700, letterSpacing: '-0.01em' }}>
           NETWORK
-        </h1>
+         <DemoBadge className="ml-2 align-middle" /></h1>
         <p className="text-[#555] mt-0.5"
           style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 12 }}>
           Community Trust Mesh · {stats.guardians} verified contacts

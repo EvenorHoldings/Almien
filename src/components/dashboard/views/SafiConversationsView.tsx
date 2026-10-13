@@ -2,6 +2,7 @@ import { memo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { MessageSquare, ChevronDown, ChevronUp, Plus, Share2 } from 'lucide-react';
 import type { ViewId } from '../AlmienDashboard';
+import DemoBadge from '@/components/DemoBadge';
 
 interface Props {
   onUpgrade: (trigger?: string) => void;
@@ -50,7 +51,7 @@ const SafiConversationsView = memo(({ onOpenSafi }: Props) => {
         <div>
           <h1 className="text-headline text-foreground flex items-center gap-2">
             <span className="text-accent-safe font-neural">✦</span> SAFI — INTELLIGENCE HISTORY
-          </h1>
+           <DemoBadge className="ml-2 align-middle" /></h1>
           <p className="text-xs text-muted-foreground mt-1">Past briefings and conversations</p>
         </div>
         <button

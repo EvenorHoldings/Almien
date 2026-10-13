@@ -13,6 +13,7 @@ import { useUserLocation } from '@/hooks/useUserLocation';
 import { useSafiBehaviourWatch, type SafiAlert } from '@/hooks/useSafiBehaviourWatch';
 import { openDirectionsTo } from '@/utils/locationUtils';
 import type { UnifiedSuburbResult } from '@/utils/suburbSearch';
+import DemoBadge from '@/components/DemoBadge';
 
 interface DashboardViewProps {
   onUpgrade: (trigger?: string) => void;
@@ -258,10 +259,7 @@ const DashboardView = memo(({ onNavigate, onOpenSafi }: DashboardViewProps) => {
         <div className="flex items-center gap-2 mb-3">
           <span className="font-neural text-[10px] font-bold text-muted-foreground uppercase tracking-wider">LIVE THREAT WIRE</span>
           <span className="px-1.5 py-0.5 rounded-full bg-accent-threat/15 text-accent-threat text-[9px] font-bold tabular-nums">{incidents.length}</span>
-          <span className="flex items-center gap-1 ml-auto">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-threat animate-pulse" />
-            <span className="text-[9px] font-bold text-accent-threat">LIVE</span>
-          </span>
+          <DemoBadge className="ml-auto" />
         </div>
         <div className="divide-y divide-[hsl(var(--border-subtle)/0.3)]">
           {incidents.map(inc => (
